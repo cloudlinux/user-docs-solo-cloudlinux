@@ -12,10 +12,10 @@ const slugifyLinks = (s) => {
 // set your global autometa options
 const autoMetaOptions = {
   site: {
-    name   : 'Cloudlinux OS Documentation',
+    name   : 'Cloudlinux OS Single Documentation',
     // twitter: 'cl_docs',
   },
-  canonical_base: 'https://docs.cloudlinux.com/',
+  canonical_base: 'https://docs.single.cloudlinux.com/',
 };
 
 module.exports = {
@@ -75,7 +75,7 @@ module.exports = {
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
-      description: "CloudLinux Documentation"
+      description: "CloudLinux OS Single Documentation"
     },
 //    "/ru/": {
 //      lang: "ru",
@@ -92,12 +92,12 @@ module.exports = {
   },
 
   themeConfig: {
-    repo: "cloudlinux/cloudlinux-doc",
+    repo: "cloudlinux/cloudlinux-single-doc",
     editLinks: true,
     docsBranch: "dev",
     docsDir: "docs",
     
-    translationSource: 'docs.cloudlinux.com',
+    translationSource: 'docs.single.cloudlinux.com',
     defaultURL: "/introduction/",
     redirectionMapping: urls,
     sidebarDepth: 2,
@@ -163,16 +163,8 @@ module.exports = {
             collapsable: false,
             children: [
               "/introduction/",
-              "/cloudlinux_installation/",
-              "/limits/",
-              "/lve_manager/",
-              "/cloudlinux-os-plus/",
-              "/cloudlinux_os_components/",
-              "/command-line_tools/",
-              "/control_panel_integration/",
-              "/cloudlinux_os_kernel/",
-              "/for_cloudlinux_partners/",
-              "/deprecated/"
+              "/installation/",
+              "/manager/"
             ]
           }
         ]
