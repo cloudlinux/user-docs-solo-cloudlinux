@@ -152,8 +152,8 @@ module.exports = {
           }
         },
         algolia: {
-          apiKey: "3990019335416f9a96a6a47d07e25187",
-          indexName: "cloudlinuxos",
+          apiKey: "73e0cad45f7181832f47f4aeccfeeaa2",
+          indexName: "cloudlinuxos-single",
           appId: "0TCNL6CGX8"
         },
 

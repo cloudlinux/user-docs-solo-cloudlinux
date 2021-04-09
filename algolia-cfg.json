@@ -1,11 +1,11 @@
 {
-  "index_name": "cloudlinuxos",
+  "index_name": "cloudlinuxos-single",
   "start_urls": [
-    "http://docs.cloudlinux.com"
+    "http://docs.single.cloudlinux.com"
   ],
   "stop_urls": [
     "/#",
-    "https://docs.cloudlinux.com/ru/"
+    "https://docs.single.cloudlinux.com/ru/"
   ],
   "selectors": {
     "lvl0": ".content h1",
@@ -26,7 +26,8 @@
   "custom_settings": {
     "attributesForFaceting": [
       "lang"
-    ]
+    ],
+	"separatorsToIndex": "./"
   },
   "selectors_exclude": [
     ".table-of-contents"
