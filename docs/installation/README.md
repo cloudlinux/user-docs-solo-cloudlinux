@@ -7,9 +7,7 @@
 * [CloudLinux OS images](/cloudlinux_installation/#cloudlinux-os-images)
 * [Net install](/cloudlinux_installation/#net-install)
 * [Provider-specific guidelines](/cloudlinux_installation/#provider-specific-guidelines)
-* [LILO boot loader](/cloudlinux_installation/#lilo-boot-loader)
 * [Uninstalling](/cloudlinux_installation/#uninstalling)
-* [Migration to EasyApache 4](/cloudlinux_installation/#migration-to-easyapache-4)
 
 ### Hardware compatibility
 
@@ -19,17 +17,8 @@ CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptio
 CloudLinux OS does not support ARM-based CPUs (e.g. Graviton)
 :::
 
-There are some incompatible devices with **CL 6**:
 
-| |  | |
-|-|--|-|
-|**Device** | **Binary Driver** | **Source**|
-|<span class="notranslate"> B110i Smart Array RAID controller </span> | hpahcisr | [https://h10032.www1.hp.com/ctg/Manual/c01754456](https://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
-|<span class="notranslate"> B120i/B320i Smart Array SATA RAID Controller </span>  | hpvsa | [https://www8.hp.com/h20195/v2/GetPDF.aspx/c04168333.pdf](https://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
-|<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
-
-
-With RHEL 8 (**CloudLinux 8/CloudLinux 7 Hybrid**), some devices are no longer supported. You can check the entire list here:
+With RHEL 8 (**CloudLinux 8**), some devices are no longer supported. You can check the entire list here:
 [https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement)
 
 
@@ -69,44 +58,15 @@ $ reboot
 ```
 </div>
 
-Once you reboot, you are running CloudLinux kernel with LVE enabled.
-
-* For CloudLinux 6 — (RHEL) 2.6 kernel 
-* For CloudLinux 6 hybrid — (RHEL) 3.10 kernel
-* For CloudLinux 7 — (RHEL) 3.10 kernel
-* For CloudLinux 7 hybrid —  (RHEL) 4.18 kernel
-* For CloudLinux 8 —  CloudLinux 8 follows the upstream (RHEL) 4.18 kernel mainline. All CloudLinux-specific features are added as a separate module (lve-kmod).
-
 The script automatically detects and supports the following control panels:
 * cPanel with EA4 ([EA3 is not supported](https://blog.cpanel.com/its-been-a-long-road-but-it-will-be-time-to-say-goodbye-soon/))
 * Plesk
 * DirectAdmin
 * InterWorx <sup>*</sup>
-  
-It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cloudlinux_os_components/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
 
-:::tip Note 
-\* For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. Find more about LVE Manager installation [here](https://www.interworx.com/support/faq/install-use-cloudlinux-plugin-interworx/)
-:::
 
 :::warning
 CloudLinux 8 supports cPanel 11.94 and newer, Plesk Obsidian 18.0.33.0 and newer and DirectAdmin out of the box.
-:::
-
-ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
-
-**Starting from version 1.61**, at the end of conversion from CentOS 7.x to CloudLinux 7, the cldeploy script converts CloudLinux 7 to [CloudLinux 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
-
-Automatic hybridization will be performed for the AMD processors with the following CPU families:
-
-* Zen / Zen+ / Zen 2 / Zen 3
-* Hygon Dhyana
-
-See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
-
-:::tip Note
-We normally recommend to install `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.  
-But when you deploy CloudLinux from the ISO image, these packages will be preinstalled. You can reinstall them after installing the control panel.
 :::
 
 #### CLDeploy Explained
@@ -125,20 +85,13 @@ By its design, CloudLinux OS is very close to the upstream operating system, Cen
 * Checks if LES is installed.
 * Checks that <span class="notranslate">`/etc/fstab`</span> has correct <span class="notranslate">`/dev/root`</span>
 * Checks for efi.
-* Installs CL kernel, lve-utils, liblve, lve-stats RPMs.
-* Installs LVE Manager for cPanel, Plesk, DirectAdmin, and ISPManager<sup>*</sup>
-* Installs mod_hostinglimits Apache module <sup>*</sup>:
-  * RPM install for Plesk, ISPManager & InterWorx;
-  * On Plesk, replaces psa-mod_fcgid* with mod_fcgid;
-  * custombuild for DirectAdmin.
+* Installs CloudLinux Manager for cPanel, Plesk, DirectAdmin, and ISPManager<sup>*</sup>
 
 #### CLDeploy Explained - reverting back to CentOS:
 
 Here's what the cldeploy script does, if one runs it to revert the system back to CentOS:
 
 * Restores CentOS repositories, and centos-release/release-notes/logos.
-* Removes lve, mod_hostinglimits, lve-stats, lvemanager.
-* mod_hostinglimits RPM is removed.
 
 Note that **cldeploy doesn't remove the kernel** to prevent condition when server has no kernels and wouldn't boot. Instead, we provie the instructions on how you could remove it manually later, when it is safe to do so.
 
@@ -146,18 +99,11 @@ On cPanel servers, rebuild of Apache with EasyApache will complete the conversio
 
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
-#### Common issues and troubleshooting during conversion
-
-If you receive any troubles during the conversion process, most likely it is because of some licensing CLN (CloudLinux Network)-related issues. Check our troubleshooting guides here to resolve them:
-[https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919](https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919)
-
 ## Activation
 
 ### Getting trial license
 
-You will need a trial activation key to be able to convert your CentOS server to CloudLinux. The trial license subscription will work for 30 days.
-
-If you have any issues getting activation key or if you have any questions regarding using your trial subscription – contact [sales@cloudlinux.com](mailto:sales@cloudlinux.com) and we will help.
+You will need a trial activation key to be able to convert your CentOS server to CloudLinux OS Single. The trial license subscription will work for 30 days.
 
 To get the activation key:
 
@@ -203,23 +149,12 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
 
 * [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/) - network/DVD installation ISOs
 
-* **Latest stable CloudLinux 7 ISO**:
-
-    * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/)
-
-
-* **Latest stable CloudLinux 6 ISO**:
-
-  * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/)
-  * i386 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/i386/](https://repo.cloudlinux.com/cloudlinux/6/iso/i386/)
-
-
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
 :::
 
 :::warning Note
-We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
+We recommend to reinstall the `cl-manager` package after installing a control panel.
 :::
 
 Mount and boot the image, then follow the steps.
@@ -231,9 +166,9 @@ Mount and boot the image, then follow the steps.
    ![](/images/network_settings.png)
 
 2. Configure installation sources:
-   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6/os/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7/os/x86_64/Packages/`</span> for CloudLinux 7 <span
+   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span
    class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/os`</span> for CloudLinux 8.
-   * also, in case you'd like to get the latest packages from the **Update** repository, add the additional **Update** repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6/updates/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7/updates/x86_64/Packages/`</span> for CloudLinux 7 and
+   * also, in case you'd like to get the latest packages from the **Update** repository, add the additional **Update** repository URL: 
    <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/os/`</span> for CloudLinux 8.   
 
    ![](/images/repository_settings.png)
@@ -241,23 +176,6 @@ Mount and boot the image, then follow the steps.
 3. Select software: select the <span class="notranslate">_Minimal install_</span> environment.
 
    ![](/images/software_selection.png)
-
-
-## CloudLinux OS images
-
-
-* [OpenStack QEMU/KVM](https://download.cloudlinux.com/cloudlinux/images/#kvm-tab)
-* [VMware](https://download.cloudlinux.com/cloudlinux/images/#vmware-tab)
-* [Google Cloud Engine](https://download.cloudlinux.com/cloudlinux/images/#gce-tab)
-* [Amazon Web Services](https://download.cloudlinux.com/cloudlinux/images/#aws-tab)
-* [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
-* [Xen](/cloudlinux_installation/#installing-new-servers)
-
-#### Xen images
-
-:::tip Note
-We do not provide Xen images of CloudLinux OS anymore, use [ISO images](#installing-new-servers) instead 
-:::
 
 ## Net install
 
@@ -269,284 +187,20 @@ To install CloudLinux over network:
 
 Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/)
 
-**For CloudLinux 7**: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso). It will boot into CloudLinux installer.
-
-Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/)
-
 2. During the CloudLinux installation, select URL as installation source and enter URL: 
 
 **For CloudLinux 8**: [https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/](https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/) and continue with installation. 
-
-**For CloudLinux 7**: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/) and continue with installation.
-
-To install CloudLinux 6 instead, use the following URL: [https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
 
 ## Provider-specific guidelines
 
-* [Amazon Web Services](/cloudlinux_installation/#aws)
-* [H-Sphere](/cloudlinux_installation/#h-sphere)
-* [DigitalOcean](/cloudlinux_installation/#digitalocean)
-* [Linode](/cloudlinux_installation/#linode)
-* [Virtuozzo and OpenVZ](/cloudlinux_installation/#virtuozzo-and-openvz)
-
 ### AWS
 
 CloudLinux OS image list can be found [here](https://download.cloudlinux.com/cloudlinux/images/#aws-tab)
 
 If you are going to use Cloudlinux OS with cPanel image, you may find useful the following [article](https://cloudlinux.zendesk.com/hc/en-us/articles/360014130320-How-to-get-CloudLinux-OS-with-cPanel-AMI-working-on-AWS)
-
-### H-Sphere
-
-* [Requirements](/cloudlinux_installation/#requirements)
-* [Converting from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid)
-* [Older versions of H-Sphere](/cloudlinux_installation/#older-versions-of-h-sphere)
-
-:::tip Note
-For H-Sphere 3.5+
-
-Please note, that CageFS and PHP Selector are not supported for H-Sphere
-:::
-
-
-#### Requirements
-
-1. CloudLinux with liblve 0.8 or later.
-2. Apache 2.2.x or 1.3.
-3. mod_suexec should be enabled.
-
-To achieve optimal performance, we recommend to [convert from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid).
-
-There is no need to install mod_hostinglimits – it comes built in with H-Sphere. Once you load kernel from CloudLinux with liblve 0.8 or later – it will get enabled.
-
-You can check if LVE is enabled by running:
-<span class="notranslate"> </span>
-```
-$ ps aux | grep httpd | grep DLIBLVE
-```
-
-If you see no output, it means that Apache didn't pick up LVE. Try checking file <span class="notranslate">` /hsphere/shared/scripts/apache-get-env.sh`</span>
-
-The following lines should be there:
-<div class="notranslate">
-
-```
-if [ -e /usr/lib64/liblve.so.0 -o -e /usr/lib/liblve.so.0 ]; then
-APENV_DSSL="$APENV_DSSL -DLIBLVE"
-fi
-```
-
-</div>
-
-If those strings are absent, you should add it, after:
-
-<div class="notranslate">
-
-```
-else
-APENV_DSSL='-DSSL'
-fi
-###
-```
-
-</div>
-
-and before:
-
-<div class="notranslate">
-
-```
-# this is used by apacheGetEnv.pm perl module
-if [ "$1" = 'show' ] ; then
-set | egrep "^APENV_"
-fi
-```
-
-</div>
-
-strings.
-
-Restart Apache afterward.
-
-:::tip Note
-Don't forget to [convert from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid).
-:::
-
-#### Converting from mod_fastcgi to mod_fcgid
-
-To achieve the best results in productivity and stability we recommend converting from <span class="notranslate">`mod_fastcgi`</span> to <span class="notranslate">`mod_fcgid`</span>.
-
-:::tip Note
-H-Sphere 3.6.3+
-:::
-
-1. Download our fcgi.conf file:
-   
-<div class="notranslate">
-
-```
-$ wget -O /hsphere/local/config/httpd2/fcgi.conf https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf
-```
-</div>
-
-2. Edit <span class="notranslate">`~httpd2/conf/extra/httpd-hostinglimits.conf`</span> to the following state:
-   
-<div class="notranslate">
-
-```
-######
-LoadModule hostinglimits_module /hsphere/shared/apache2/modules/mod_hostinglimits.so
-
-<IfModule mod_hostinglimits.c>
-SkipErrors Off
-AllowedHandlers cgi-script %php% fcgid-script application/x-miva-compiled
-DenyHandlers hs-php5-script hs-php53-script hs-php54-script
-Include /hsphere/local/config/httpd2/fcgi.conf
- 
-</IfModule>
-#######
-```
-</div>
-
-3. Go to <span class="notranslate">`P.Servers > web server [Config]`</span> and be sure to have enabled:
-   * <span class="notranslate">`apache_version=2`</span>
-   * <span class="notranslate">`apache_mpm=prefork`</span>
-   * <span class="notranslate">`apache_fastcgi`</span>
-   * <span class="notranslate">`apache_fcgid`</span>
-   * <span class="notranslate">`PHP version/mode: php_fastcgi`*</span>
-
-:::tip Note
-*No changes needed to `httpd.conf.tmpl.custom` or `usermodule.phpmode` as this version provides its own mod_fcgid.
-:::
-
-#### Older versions of H-Sphere
-
-1. Compile mod_fcgid module:
-   
-<div class="notranslate">
-
-```
-$ yum install gcc liblve-devel zlib-devel openssl-devel 
-$ wget https://apache.osuosl.org//httpd/mod_fcgid/mod_fcgid-2.3.9.tar.gz
-$ tar zxvf mod_fcgid-2.3.9.tar.gz
-$ cd mod_fcgid-2.3.9/
-$ APXS=/hsphere/shared/apache2/bin/apxs ./configure.apxs 
-$ make
-$ mv modules/fcgid/.libs/mod_fcgid.so /hsphere/shared/apache2/modules
-```
-</div>
-
-2. Download and apply patch [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch) to `/hsphere/local/config/scripts/usemodule.phpmode`:
-   
- <div class="notranslate">
-
-```
-$ wget https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch 
-$ patch /hsphere/local/config/scripts/usemodule.phpmode usemodule.phpmode.patch
-```
-
-</div>
-
-3. If `/hsphere/local/config/httpd2/httpd.conf.tmpl.custom` does not exists – create it:
-   
-<div class="notranslate">
-
-```
-$ cp -rp /hsphere/local/config/httpd2/httpd.conf.tmpl /hsphere/local/config/httpd2/httpd.conf.tmpl.custom
-```
-</div>
-
-Download and apply patch [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch) to the <span class="notranslate">`/hsphere/local/config/httpd2/httpd.conf.tmpl.custom`</span>:
-
-<div class="notranslate">
-
-```
-$ wget https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch 
-$ patch --fuzz=3 /hsphere/local/config/httpd2/httpd.conf.tmpl.cusom  httpd.conf.tmpl.patch
-```
-
-</div>
-
-4. Download pre-defined config file [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf) to `/hsphere/local/config/httpd2`:
-
-<div class="notranslate">
-
-```
-$ wget -O /hsphere/local/config/httpd2/fcgi.conf https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf
-```
-
-</div>
-
-5. Download our wrapper file [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper) into <span class="notranslate">`/hsphere/shared/php5/bin/`</span> and make it executable:
-
-<div class="notranslate">
-
-```
-$ wget -O /hsphere/shared/php5/bin/php-wrapper https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper
-$ chmod 755 /hsphere/shared/php5/bin/php-wrapper
-```
-
-</div>
-
-6. Change permissions for <span class="notranslate">`/hsphere/local/home`</span> to 755:
-   
-<div class="notranslate">
-
-```
-$ chmod 755 /hsphere/local/home
-```
-
-</div>
-
-7. Edit <span class="notranslate">`~httpd2/conf/extra/httpd-hostinglimits.conf`</span> and add DenyHandlers, so section will look like:
-   
-<div class="notranslate">
-
-```
-<IfModule mod_hostinglimits.c>
-SkipErrors Off
-AllowedHandlers cgi-script %php% fcgid-script application/x-miva-compiled
-DenyHandlers hs-php5-script hs-php53-script hs-php54-script 
-</IfModule>
-```
-
-</div>
-
-8. Configure physical server from H-Sphere admin > E.Manager > P.Servers > server_name [parameters] icon, settings should be:
- 
-<div class="notranslate">
-
-```
-apache_version = 2
-apacha_fastcgi = yes
-apache_status = yes
-```
-</div>
-
-
-![](/images/sshot-2013-07-30-21-25-48.png)
-
-9. Set PHP configuration to:
-    
-<div class="notranslate">
-
-```
-php_libphp5 enabled but not default
-php_fastcgi5 enabled and is default
-```
-</div>
-
-![](/images/sshot-2013-07-30-21-31-05.png)
-
-Other options could be configured according to personal needs.
-
-When done - click <span class="notranslate">_SUBMIT_</span> to apply changes.
-
-:::tip Note
-After updating H-Sphere software on web server with CloudLinux you need to re-apply step 2 (patch usemodule.phpmode) and restart apache with `/hsphere/shared/scripts/apache-restart` script.
-:::
 
 ### DigitalOcean
 
@@ -625,239 +279,16 @@ You can find more information about creating/adding SSH keys in [this article](h
 
 ![](/images/sshclient.png)
 
-
-### Linode
-
-* [CloudLinux on Linode KVM](/cloudlinux_installation/#cloudlinux-on-linode-kvm)
-* [CloudLinux on Linode Xen](/cloudlinux_installation/#cloudlinux-on-linode-xen)
-
-:::warning Warning
-If you are installing CloudLinux 8, please make sure you’ve read [https://www.linode.com/community/questions/19397/i-just-upgraded-my-centos-8-linode-and-now-it-wont-boot-how-do-i-fix-this-proble](https://www.linode.com/community/questions/19397/i-just-upgraded-my-centos-8-linode-and-now-it-wont-boot-how-do-i-fix-this-proble)
-:::
-
-
-#### CloudLinux on Linode KVM
-
-To install CloudLinux 7 on Linode KVM server you should perform the following steps:
-
-1. Deploy CL to your Linode following the steps from [this section](/cloudlinux_installation/#converting-existing-servers)
-
-2. Install grub on your system:
-   
-<div class="notranslate">
-
-```
-yum install grub2
-```
-</div>
-
-3. Add to <span class="notranslate">`/etc/default/grub`</span> the following parameters:
-   
-<div class="notranslate">
-
-```
-GRUB_TIMEOUT=10
-GRUB_CMDLINE_LINUX="console=ttyS0,19200n8"
-GRUB_DISABLE_LINUX_UUID=true
-GRUB_SERIAL_COMMAND="serial --speed=19200 --unit=0 --word=8 --parity=no --stop=1"
-```
-</div>
-
-4. Update grub config:
-   
-<div class="notranslate">
-
-```
-grub2-mkconfig -o /boot/grub/grub.cfg
-```
-</div>
-
-5. Edit your Linode profile, change the boot settings to <span class="notranslate">`GRUB 2`</span> .
-
-6. Reboot your Linode.
-
-After reboot you will have fully operational CloudLinux 7 system and can proceed with other configuration you need.
-
-#### CloudLinux on Linode Xen
-
-To install CloudLinux 7 on Linode Xen please perform the following steps:
-
-1. Deploy CL to your Linode following the steps from [this section](/cloudlinux_installation/#converting-existing-servers).
-
-2. Create the file <span class="notranslate">`/boot/grub/menu.lst`</span> with the following content:
-   
-<div class="notranslate">
-
-```
-timeout 5
-title CloudLinux 7.1, $KVERSION
-root (hd0)
-kernel /boot/vmlinuz-$KVERSION root=/dev/xvda1 ro quiet
-initrd /boot/initramfs-$KVERSION.img
-```
-</div>
-
-where <span class="notranslate">`$KVERSION`</span> is the version of the installed CloudLinux 7 kernel.
-
-:::tip Note
-You will need to update <span class="notranslate">`/boot/grub/menu.lst`</span> manually after every kernel update.
-:::
-
-3. Switch boot settings to <span class="notranslate">`pv-grub-x86_64`</span> and switch off <span class="notranslate">`Auto-configure networking`</span> in Linode settings.
-
-4. Reboot your Linode.
-
-In case if you will migrate to KVM later you will need only switch the boot settings to <span class="notranslate">`GRUB 2`</span>.
-
-
-### Virtuozzo and OpenVZ
-
-* [Installation](/cloudlinux_installation/#installation-2)
-
-:::warning Note
-Starting from November 1st, 2019, we do not support Virtuozzo and OpenVZ **containers**.
-However, you can run CloudLinux OS on OpenVZ 6 and Virtuozzo 6 **hypervisors**. The hypervisor virtualization is the same as for **Xen/KVM/VMware**. Check how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
-:::
-
-:::tip Note
-* Virtuozzo 6 and OpenVZ 6 are supported.
-* Virtuozzo 7 and OpenVZ 7 are not supported.
-:::
-
-:::tip Note
-Kernel 2.6.32-042stab088.4 or later required
-:::
-
-CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only the following functionality works:
-
-* CageFS
-* PHP Selector
-* max entry processes
-* mod_lsapi
-* MySQL Governor
-
-#### Installation
-
-VZ Node (needs to be done once for the server):
-
-:::tip Note
-Make sure all containers are stopped prior to doing this operation. Or reboot the server after the install.
-:::
-
-:::tip Note
-Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed. If no - install them with `yum`
-:::
-
-<div class="notranslate">
-
-```
-yum install vzkernel-headers vzkernel-devel
-
-$ wget -P /etc/yum.repos.d/ https://repo.cloudlinux.com/vzlve/vzlve.repo
-$ yum install lve-kernel-module
-```
-
-</div>
-
-This will setup LVE module for VZ kernel, as well as DKMS to update that module each time VZ kernel is updated.
-
-After this is done, you can add LVE support for any container on a node, at any time.
-
-To make CloudLinux work inside VZ container, VZ node has to be enabled. This should be done for any container where LVE support needs to be added:
-
-<div class="notranslate">
-
-```
-$ vzctl set CT_ID --devnodes lve:rw --save
-```
-
-</div>
-
-To disable LVE support for Container:
-
-<div class="notranslate">
-
-```
-$ vzctl set CT_ID --devnodes lve:none --save
-```
-
-</div>
-
-Inside container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers).
-
-CloudLinux license is required for each VZ container.
-
-:::tip Note
-Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors.
-:::
-
-To increase `fs.ve-mount-nr`, on a host node:
-
-1. add <span class="notranslate">`fs.ve-mount-nr = 15000`</span> to <span class="notranslte">`/etc/sysctl.conf`</span>;
-
-2. apply it with <span class="notranslate">`sysctl -p`</span> command.
-
-In very rare cases the value should be increased higher, up to 50000.
-
-## LILO boot loader
-
-CloudLinux can be deployed on servers that don't have grub installed, by installing <span class="notranslate">`хороgrub`</span> first.
-
-To do that:
-
-1. Make sure grub and kernel packages are not excluded. Edit file <span class="notranslate">`/etc/yum.conf`</span> and check <span class="notranslate">`exclude=`</span> line for presence of <span class="notranslate">`kernel* grub*`</span>.
-
-2. Backup lilo config file:
-   
-<div class="notranslate">
-
-```
-mv /etc/lilo.conf /etc/lilo.conf.bak
-```
-</div>
-
-3. Convert to CloudLinux using <span class="notranslate"> [deploy2cl](/cloudlinux_installation/#converting-existing-servers)</span> utility.
-
-4. Check <span class="notranslate">`grub.conf`</span> – it should be configured automatically:
- 
- <div class="notranslate">
-
- ```
- # cat /boot/grub/grub.conf
-default=0
-timeout=5
- title CloudLinux Server (2.6.18-294.8.1.el5.lve0.7.33)
-      kernel /boot/vmlinuz-2.6.18-294.8.1.el5.lve0.7.33 root=/dev/sda1  ro
-      root (hd0,0)
-      initrd /boot/initrd-2.6.18-294.8.1.el5.lve0.7.33.img
-      title linux centos5_64
-      kernel /boot/bzImage-2.6.33.5-xxxx-grs-ipv4-64 root=/dev/sda1  ro
-      root (hd0,0)
-```
-</div>
-
-5. Install grub to master boot record:
-   
- <div class="notranslate">
-
- ```
- /sbin/grub-install /dev/sda
- ```
- </div>
-
-6. Reboot and check that you are running CloudLinux. <span class="notranslate">`uname -r`</span> should show something like: <span class="notranslate">`2.6.18-294.8.1.el5.lve0.7.33`</span>.
-
 ## Uninstalling
 
 You can always uninstall CloudLinux OS. In this case, the system will be converted back to CentOS (even if the original system was RHEL)
 
 The following actions will be taken:
 
-1. LVE related packages will be removed.
-2. CloudLinux repositories & <span class="notranslate">yum</span> plugin will be removed.
-3. CentOS repositories will be set up.
+1. CloudLinux repositories & <span class="notranslate">yum</span> plugin will be removed.
+2. CentOS repositories will be set up.
 
-In the end, the script will provide instructions on how to finish the conversion back to CentOS. That will require removal of CloudLinux kernel (manual step), and installation of CentOS kernel (if needed).
+In the end, the script will provide instructions on how to finish the conversion back to CentOS. 
 
 :::warning
 Do not forget to free up a CloudLinux OS license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers). After that, if you don't intend to use the license anymore, you can [remove it](https://docs.cln.cloudlinux.com/dashboard/#cloudlinux-os-activation-keys) to avoid being billed for it. 
@@ -873,179 +304,6 @@ $ sh cldeploy -c
 ```
 </div>
 
-Now you have converted back to CentOS and it is the time to install kernel.
-
-To delete CloudLinux kernel, run (change the kernel package name to the one you've been using):
-
-<div class="notranslate">
-
-```
-rpm -e --nodeps kernel-2.6.32-673.26.1.lve1.4.27.el6.x86_64
-```
-</div>
-
-To install new CentOS kernel once you deleted CloudLinux kernel, type <span class="notranslate">`yum install kernel`</span>.
-
-If <span class="notranslate">`yum`</span> says that the latest kernel is already installed, it is OK.
-
-Please check your bootloader configuration before rebooting the system.
-
-To remove unused kmods and lve libs run:
-
-<div class="notranslate">
-
-```
-yum remove lve kmod*lve*
-```
-</div>
-
-Kernel package and related LVE packages should be deleted and the required kernel will be installed.
-
-Before the reboot, the following command should be executed for restoring Apache and httpd.conf without <span clas="notranslate">mod_hostinglimits</span>:
-
-**For EasyApache 3:**
-
-<div class="notranslate">
-
-```
-/scripts/easyapache --build
-```
-</div>
-
-**For EasyApache 4:**
-
-<div class="notranslate">
-
-```
-/usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/cpanel/default.json
-```
-</div>
-
-:::tip Note
-Some of the packages from CloudLinux repo will still be present. They are the same as CentOS packages, and don't have to be removed. They will be updated in the future from CentOS repositories, as new versions come out.
-:::
-
-## Migration to EasyApache 4
-
-* [Advices and limitations](/cloudlinux_installation/#advices-and-limitations)
-* [CentOS with EasyApache 4](/cloudlinux_installation/#centos-with-easyapache-4)
-* [CentOS without EasyApache 4](/cloudlinux_installation/#centos-without-easyapache-4)
-* [CloudLinux without EasyApache 4](/cloudlinux_installation/#cloudlinux-without-easyapache-4)
-* [More about cloudlinux_ea3_to_ea4 script](/cloudlinux_installation/#more-about-cloudlinux-ea3-to-ea4-script)
-
-#### Advices and limitations
-
-* Use cPanel 11.55.999.66(55.999.66) or higher version.
-* <span class="notranslate">Hardened EA4</span> limitations:
-  * **ea-php51** and **ea-php52** have no PHP-FPM support. Please use **mod_lsapi** instead.
-
-Follow the instructions [here](/cloudlinux_os_components/#installation-3) to install and configure mod_lsapi.
-
-#### CentOS with EasyApache 4
-
-If EasyApache 4 was installed earlier on your CentOS server and you would like to migrate to CloudLinux:
-
-1. Convert server from CentOS  to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
-
-2. Restart Apache service.
-
-#### CentOS without EasyApache 4
-
-If EasyApache 4 was not installed earlier on your CentOS server and you would like to migrate to CloudLinux:
-
-1. Convert server from CentOS to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
-
-2. Run:
-   
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4; sh cloudlinux_ea3_to_ea4 --convert
-```
-</div>
-
-(Find examples of <span class="notranslate">`cloudlinux_ea3_to_ea4`</span> script usage below).
-
-#### CloudLinux without EasyApache 4
-
-Install EasyApache4 on clean CloudLinux from ISO image or migrate to EasyApache4 on existings CloudLinux servers:
-
-1. Install cPanel.
-2. Run:
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4; sh cloudlinux_ea3_to_ea4 --convert
-```
-</div>
-
-(Find examples of `cloudlinux_ea3_to_ea4` script usage below).
-
-
-#### More about cloudlinux_ea3_to_ea4 script
-
-About `cloudlinux_ea3_to_ea4` migration script parameters:
-
-<div class="notranslate">
-
-```
-cloudlinux_ea3_to_ea4 [ADDITIONS] ACTIONS
-```
-</div>
-
-
-Usage:
-
-| | |
-|-|-|
-|<span class="notranslate">-h, --help</span>  | Print this message|
-
-`Actions` (required parameter, shows what should script do):
-
-| | |
-|-|-|
-|<span class="notranslate"> -c, --convert </span>  | Convert EA3 to EA4|
-|<span class="notranslate"> -r, --revert </span> | Revert to EA3|
-
-`Additions` (optional parameter, adds to action installation of extra components):
-
-| | |
-|-|-|
-|<span class="notranslate"> -m, --mod_lsapi </span> | Install mod_lsapi|
-|<span class="notranslate"> -p, --mod_passenger </span> | Install alt-mod-passenger|
-|<span class="notranslate"> -a, --altphp </span> | Install/Update alt-php|
-
-
-**Examples:**
-
-* If you want to install EA4 with mod_lsapi and update/install alt-php:
-  
-<div class="notranslate">
-
-```
-sh cloudlinux_ea3_to_ea4 --convert --mod_lsapi --altphp 
-```
-</div>
-
-* If you want to install EA4 with mod_lsapi, alt_mod_passenger and update/install alt-php:
-  
-<div class="notranslate">
-
-```
-sh cloudlinux_ea3_to_ea4 --convert --mod_lsapi --altphp --mod_passenger
-```
-</div>
-
-* To restore EA3 with mod_lsapi:
-
-<div class="notranslate">
-
-```
-sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
-```
-</div>
-
-See also: [FAQ](https://cloudlinux.zendesk.com/hc/articles/360025827914-CloudLinux-OS-Installation-FAQ)
+Now you have your system converted back to CentOS.
 
 
