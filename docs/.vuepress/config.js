@@ -12,10 +12,10 @@ const slugifyLinks = (s) => {
 // set your global autometa options
 const autoMetaOptions = {
   site: {
-    name   : 'Cloudlinux OS Single Documentation',
+    name   : 'Cloudlinux OS Solo Documentation',
     // twitter: 'cl_docs',
   },
-  canonical_base: 'https://docs.single.cloudlinux.com/',
+  canonical_base: 'https://docs.solo.cloudlinux.com/',
 };
 
 module.exports = {
@@ -75,7 +75,7 @@ module.exports = {
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
-      description: "CloudLinux OS Single Documentation"
+      description: "CloudLinux OS Solo Documentation"
     },
 //    "/ru/": {
 //      lang: "ru",
@@ -97,7 +97,7 @@ module.exports = {
     docsBranch: "dev",
     docsDir: "docs",
     
-    translationSource: 'docs.single.cloudlinux.com',
+    translationSource: 'docs.solo.cloudlinux.com',
     defaultURL: "/introduction/",
     redirectionMapping: urls,
     sidebarDepth: 2,

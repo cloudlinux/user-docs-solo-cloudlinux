@@ -103,7 +103,7 @@ On DirectAdmin servers, rebuild of Apache with custombuild will complete the con
 
 ### Getting trial license
 
-You will need a trial activation key to be able to convert your CentOS server to CloudLinux OS Single. The trial license subscription will work for 30 days.
+You will need a trial activation key to be able to convert your CentOS server to CloudLinux OS Solo. The trial license subscription will work for 30 days.
 
 To get the activation key:
 

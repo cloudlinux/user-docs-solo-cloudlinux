@@ -2,22 +2,22 @@
 
 [[toc]]
 
-### What is CloudLinux OS Single
+### What is CloudLinux OS Solo
 
-CloudLinux OS Single is designed for web hosting providers and companies that run dedicated servers/VPS. 
+CloudLinux OS Solo is designed for web hosting providers and companies that run dedicated servers/VPS. 
 
-### CloudLinux OS Single life cycle
+### CloudLinux OS Solo life cycle
 
-CloudLinux OS Single supports the same life cycle policy as RHEL. Using a supported operating system is critical to maintaining a stable server environment.
+CloudLinux OS Solo supports the same life cycle policy as RHEL. Using a supported operating system is critical to maintaining a stable server environment.
 
 Currently, the following version are supported:
 
 | |  | |
 |-|--|-|
 |Operating System | Release Date| End of Life and Support|
-|CloudLinux OS Single 8 | Mar 17, 2020 | May 31, 2029 |
+|CloudLinux OS Solo 8 | Mar 17, 2020 | May 31, 2029 |
 
-### Description of CloudLinux OS Single components
+### Description of CloudLinux OS Solo components
 
 * **CloudLinux Manager**
 
