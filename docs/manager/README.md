@@ -39,6 +39,21 @@ Report is regenerated each time the page is loaded, so all changes in configurat
 * **Not started requests due to short check interval** - this metric is used to adjust configuration. If it is not equal 0, an admin should increase the value of Requests sending interval, because the tool does not fit into this interval to send requests to all domains.
 * **Slowest websites in 24h and Websites with most errors in 24h** - in these sections you can find the number of domains that was exposed here.
 
+### WMT Settings
+
+To enable or disable **Website monitoring**, use the following slider.
+
+![](/images/WebsiteMonitoringSlider.png)
+
+* **Email to send daily report** - all email notifications will be sent to this email address
+
+* **Check every X minutes** - this is a period in minutes between requests to the same domain.
+* **Time allowed for response** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behaviour as the `HTTP 408` error.
+* **Enable summary notifications** - turn on/off summary daily email report notifications
+* **Enable alert notifications** - turn on/off immediate alert email notifications
+* **Domains and URLs Ignore List** - domains and URLs that will not be requested and displayed in reports, supported formats: `example.com, http://example.com`
+
+
 ### WMT CLI
 
 The `wmt-api-solo` utility allows to manage Website Monitoring tool via CLI.
@@ -75,7 +90,7 @@ Example of the `/usr/share/web-monitoring-tool/wmtbin/wmt-api-solo` command usag
 
 This way you can set all or only certain parameters.
 
-#### WMT email notifications
+### WMT email notifications
 
 There are two types of emails sent by Web monitoring tool
 
@@ -110,24 +125,7 @@ This is an example of a report from the Slow Site analyzer. The report shows the
 You can find the explanation of the **Slow requests density in period** [here](/lve_manager/#what-is-the-density-threshold).
 
 
-#### Settings
-
-Here, an admin can configure the Website monitoring and the PHP Site analyzer.
-
-![](/images/Webmonitoringtoolsettings.png)
-
-To enable or disable **Website monitoring**, use the following slider.
-
-![](/images/WebsiteMonitoringSlider.png)
-
-* **Email to send daily report** - all email notifications will be sent to this email address
-
-* **Check every X minutes** - this is a period in minutes between requests to the same domain.
-* **Time allowed for response** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behaviour as the `HTTP 408` error.
-* **Enable summary notifications** - turn on/off summary daily email report notifications
-* **Enable alert notifications** - turn on/off immediate alert email notifications
-* **Domains and URLs Ignore List** - domains and URLs that will not be requested and displayed in reports, supported formats: `example.com, http://example.com`
-
+#### PHP Slow Site analyzer settings
 
 To enable or disable the **Slow site analyzer**, use the following slider.
 
