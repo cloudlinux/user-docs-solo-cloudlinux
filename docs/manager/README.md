@@ -39,8 +39,6 @@ Report is regenerated each time the page is loaded, so all changes in configurat
 * **Not started requests due to short check interval** - this metric is used to adjust configuration. If it is not equal 0, an admin should increase the value of Requests sending interval, because the tool does not fit into this interval to send requests to all domains.
 * **Slowest websites in 24h and Websites with most errors in 24h** - in these sections you can find the number of domains that was exposed here.
 
-  ![](/images/TopSlow.png)
-
 ### WMT CLI
 
 The `wmt-api-solo` utility allows to manage Website Monitoring tool via CLI.
@@ -76,6 +74,32 @@ Example of the `/usr/share/web-monitoring-tool/wmtbin/wmt-api-solo` command usag
 ```
 
 This way you can set all or only certain parameters.
+
+#### WMT email notifications
+
+There are two types of emails sent by Web monitoring tool
+
+#### Daily email report
+
+Summary report with all data for the previous day. It is created and sent every day at midnight
+
+
+**Example of the Web monitoring tools daily report**.
+
+![](/images/Webmonitoringtoolemail.png)
+
+#### Alert
+
+Domains that are responding with non-200 status code will be re-requested in 5 minutes or in `ping_interval` setting (in case it is less than 5 minutes).
+If domains are still responding with non-200 status code - Web monitoring tool will inform about such domains with immediate alert email.
+
+**Example of the Web monitoring tools immediate alert**.
+
+![](/images/Webmonitoringtoolalert.png)
+
+:::tip Note
+The next alert with domains will not be sent in less than 6 hours. Also, if alerted domain is still responding with non-200 status code even after 6 hours - it will not be re-alerted until it responds with 200 status code at least once and becomes unavailable again.
+:::
 
 ## PHP Slow Site analyzer
 
@@ -123,31 +147,7 @@ A density threshold is a numerical measure of some type of correlation, meaning 
 
 Slow requests that represent bursts of activity and are weakly related to all activity per domain typically have a low density and will be weeded out.
 
-#### Email notifications
-
-There are two types of emails sent by Web monitoring tool
-
-#### Daily email report
-
-Summary report with all data for the previous day. It is created and sent every day at midnight
-
-
-**Example of the Web monitoring tools daily report**.
-
-![](/images/Webmonitoringtoolemail.png)
-
-#### Alert
-
-Domains that are responding with non-200 status code will be re-requested in 5 minutes or in `ping_interval` setting (in case it is less than 5 minutes).
-If domains are still responding with non-200 status code - Web monitoring tool will inform about such domains with immediate alert email.
-
-**Example of the Web monitoring tools immediate alert**.
-
-![](/images/Webmonitoringtoolalert.png)
-
-:::tip Note
-The next alert with domains will not be sent in less than 6 hours. Also, if alerted domain is still responding with non-200 status code even after 6 hours - it will not be re-alerted until it responds with 200 status code at least once and becomes unavailable again.
-:::
+#### PHP Slow site analyzer notifications
 
 **Example of the PHP Slow site analyzer report**.
 
