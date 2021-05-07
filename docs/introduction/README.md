@@ -5,10 +5,10 @@
 ## What is CloudLinux OS Solo
 
 CloudLinux OS Solo is designed for installation on VPS or dedicated servers 
-with a single hosting account any number of websites. 
+with a single hosting account for any number of websites. 
 Unlike [CloudLinux OS Shared](https://docs.cloudlinux.com/introduction/), 
 this edition is not designed for Shared Hosting usage 
-and it does not include any LVE-related features.
+and it does not include any [LVE-related](https://docs.cloudlinux.com/lve_manager/) features.
 
 ### Benefits
 
@@ -17,6 +17,7 @@ We believe that this distribution will be useful for you if:
    CloudLinux OS Solo provides a set of tools for website monitoring and performance tracking out-of-box;
 2. as a service provider you sell VPS servers and some of your customers require OS with extensive features 
    for better security, support, and performance.
+3. as a customer you want to be sure that [product has 24/7 technical support](https://cloudlinux.zendesk.com/).
 
 ### CloudLinux OS Solo features
  
@@ -27,8 +28,7 @@ We pre-installed a couple of useful features in our distribution.
   CloudLinux Manager is a plugin which allows you to control all the
   CloudLinux settings from an easy-to-use web UI integrated into your control panel. 
   
-  The submodules you can find in CloudLinux Manager are: 
-  X-Ray, Website Monitoring Tool and PHP Slow Site Analyzer.
+  The submodules you can find in CloudLinux Manager are X-Ray (PHP Slow Site Analyzer) and Website Monitoring Tool.
 
   [See more](/manager/).
 
