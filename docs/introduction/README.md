@@ -55,7 +55,7 @@ We pre-installed a couple of useful features in our distribution.
 
 We provide trial licenses for 30 days. You can get your trial key in two ways:
 1. On CLN website, see [CLN registration](/cln/) section.
-2. In CloudLinux Manager plugin, see [getting trial key](/manager/#trial) section.
+2. In CloudLinux Manager plugin, see [getting trial key](/manager/#activation) section.
 
 Trial key must be entered during installation.
 

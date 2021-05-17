@@ -11,6 +11,32 @@ Log in as administrator to get access to the following functionality:
 * <span class="notranslate">Website Monitoring</span> provides access to Website Monitoring and PHP Slow Site Analyzer.
 * <span class="notranslate">X-Ray</span> tab - provides access to X-Ray;
 
+## Activation
+To start using CloudLinux Manager, it must be activated with your CLN activation key.
+
+In order to activate CloudLinux Manager features: 
+
+* Enter your CLN activation key if you already have it 
+    ![](/images/cloudlinuxmanageractivation.png)
+  
+    More about CLN activation key [CLN registration](/cln/)
+
+* Sign up and get 30-days trial license
+
+    You will be asked to provide information about yourself by filling out the form
+
+    ![](/images/cloudlinuxmanageractivationsignupform.png)
+
+    CloudLinux Manager will be activated automatically after submitting the form.
+
+    ![](/images/cloudlinuxmanageractivationsignup.png)
+
+    :::tip Note
+    After submitting the registration form you will get a trial license valid for next 24 hours.
+    To prolong license for 30 days, please, follow the activation instructions sent to email specified during
+    registration.
+    :::
+
 ## Website monitoring tool
 
 **Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
