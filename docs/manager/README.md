@@ -39,16 +39,16 @@ In order to activate CloudLinux Manager features:
 
 ## Website monitoring tool
 
-**Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
+**Website monitoring tool** is a tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
 
-You can configure the Website monitoring tool and Slow Site analyzer and view the daily reports in the CloudLinux Manager -> Website monitoring tab.
+You can configure the Website monitoring tool and [Slow Site analyzer](/manager/#php-slow-site-analyzer) and view the daily reports in the CloudLinux Manager -> Website monitoring tab.
 
-There are Main, PHP Site analyzer, and Settings subtabs here.
+There are Main, PHP Site analyzer, and Settings subtabs [here](/manager/#main).
 
 :::warning Warning
 For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed. This possibility will be added in the future releases.
 
-You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
+You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[WMT Settings](/manager/#wmt-settings)_ and _[PHP Site Analyzer Settings](/manager/#php-slow-site-analyzer-settings)_ subtabs, so sites statistics will stop collecting and there will be no additional load on the server.
 :::
 
 #### Main
@@ -57,7 +57,7 @@ This subtab views the latest report (for the last 24 hours) of the Website monit
 
 ![](/images/WebsiteMonitoringMain.png)
 
-Report is regenerated each time the page is loaded, so all changes in configuration (the _Settings_ tab) or in the list of domains will be applied immediately.
+Report is regenerated each time the page is loaded, so all changes in configuration (the [_Settings_](/manager/#wmt-settings) tab) or in the list of domains will be applied immediately.
 
 * **Total number of requests** - requests that were sent to all domains, existing on the servers
 * **Successful requests** - the number of requests for all domains with ![](/images/Code200.png)
@@ -73,16 +73,21 @@ To enable or disable **Website monitoring**, use the following slider.
 
 * **Email to send daily report** - all email notifications will be sent to this email address
 
+:::warning Warning
+If email is not specified, all [notifications](/manager/#wmt-email-notifications) will be sent to control panel administrator`s email.
+:::
+
+![](/images/Webmonitoringtoolsettings.png)
+
 * **Check every X minutes** - this is a period in minutes between requests to the same domain.
 * **Time allowed for response** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behaviour as the `HTTP 408` error.
 * **Enable summary notifications** - turn on/off summary daily email report notifications
 * **Enable alert notifications** - turn on/off immediate alert email notifications
 * **Domains and URLs Ignore List** - domains and URLs that will not be requested and displayed in reports, supported formats: `example.com, http://example.com`
 
-
 ### WMT CLI
 
-The `wmt-api-solo` utility allows to manage Website Monitoring tool via CLI.
+The `wmt-api-solo` utility allows managing Website Monitoring tool via CLI.
 
 **Usage**
 
