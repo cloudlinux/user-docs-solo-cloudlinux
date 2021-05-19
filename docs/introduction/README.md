@@ -4,11 +4,9 @@
 
 ## What is CloudLinux OS Solo
 
-CloudLinux OS Solo is designed for installation on VPS or dedicated servers 
-with a single hosting account for any number of websites. 
-Unlike [CloudLinux OS Shared](https://docs.cloudlinux.com/introduction/), 
-this edition is not designed for Shared Hosting usage 
-and it does not include any [LVE-related](https://docs.cloudlinux.com/lve_manager/) features.
+CloudLinux OS Solo is designed for installation on VPS or dedicated servers with a single hosting account for any number of websites. 
+
+Unlike [CloudLinux OS Shared](https://docs.cloudlinux.com/introduction/), this edition is not designed for Shared Hosting usage  and it does not include any [LVE-related](https://docs.cloudlinux.com/lve_manager/) features.
 
 ### Benefits
 
@@ -21,30 +19,30 @@ We believe that this distribution will be useful for you if:
 
 ### CloudLinux OS Solo features
  
-We pre-installed a couple of useful features in our distribution.
+We've pre-installed a couple of useful features in our distribution.
 
 * **CloudLinux Manager**
 
   CloudLinux Manager is a plugin which allows you to control all the
   CloudLinux settings from an easy-to-use web UI integrated into your control panel. 
   
-  The submodules you can find in CloudLinux Manager are X-Ray (PHP Slow Site Analyzer) and Website Monitoring Tool.
+  The sub-modules you can find in CloudLinux Manager are X-Ray (PHP Slow Site Analyzer) and Website Monitoring tool.
 
   [See more](/manager/).
 
-* **Website Monitoring Tool**
+* **Website Monitoring tool**
 
-  Website Monitoring Tool is a tool that allows you to track your websites uptime 
+  Website Monitoring tool is a tool that allows you to track your websites uptime 
   and receive notifications about problems with access.
 
-  Website Monitoring Tool can gather and display information regarding the slowest websites on server, 
-  notify using email about errors happened on websites and send you a daily website performance reports.
+  Website Monitoring tool can gather and display information regarding the slowest websites on the server, 
+  notify by emails about errors happened on websites and send you daily website performance reports.
 
   [See more](/manager/#website-monitoring-tool).
 
 * **X-Ray**
 
-  X-Ray or Slow Sites Analyzer is a tool developed for website performance monitoring and performance issues detection.
+  X-Ray or Slow Sites analyzer is a tool developed for website performance monitoring and performance issues detection.
 
   X-Ray can gather and visualize information about top N slowest system functions, external requests, 
   software modules and database queries of the client’s website.
@@ -53,11 +51,14 @@ We pre-installed a couple of useful features in our distribution.
 
 ### How can I try your distribution before paying for it?
 
-We provide trial licenses for 30 days. You can get your trial key in two ways:
-1. On CLN website, see [CLN registration](/cln/) section.
-2. In CloudLinux Manager plugin, see [getting trial key](/manager/#trial) section.
+We provide trial licenses for 30 days.
 
-Trial key must be entered during installation.
+You can get your trial key in two ways:
+
+1. On the CLN website, see the [CLN registration](/cln/) section.
+2. In the CloudLinux Manager plugin, see the [getting trial key](/manager/#trial) section.
+
+The trial key must be entered during installation.
 
 ### CloudLinux OS Solo lifecycle
 
@@ -72,5 +73,5 @@ Currently, the following version are supported:
 
 ## What's next
 
-1. [Installation](/installation) section contains information about how to install this OS;
-2. [CLN](/cln) section has instructions about how to buy license or get trial.
+1. The [Installation](/installation) section contains information about how to install this OS.
+2. The [CLN](/cln) section contains the instructions about how to buy license or get trial.
