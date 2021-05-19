@@ -164,65 +164,21 @@ module.exports = {
             children: [
               "/introduction/",
               "/installation/",
-              "/manager/"
+              "/activation/",
+              "/manager/",
             ]
           }
         ]
       },
-//      "/ru/": {
-//        title: "Язык",
-//        selectText: "Рус",
-//        label: "Русский",
-//        editLinkText: "Редактировать",
-//        tryFree: "Попробовать бесплатно",
-//        search: "Поиск",
-//        serviceWorker: {
-//          updatePopup: {
-//            message: "Доступен новый контент",
-//            buttonText: "Обновить"
-//          }
-//        },
-//        algolia: {
-//          apiKey: "3990019335416f9a96a6a47d07e25187",
-//          indexName: "cloudlinuxos-ru",
-//          appId: "0TCNL6CGX8"
-//        },
-//        stayInTouch: "Будем на связи",
-//        bottomLinks: [
-//            {
-//                text: "Инструкции",
-//                url: "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I"
-//            },
-//            {
-//                text: "С чего начать",
-//                url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
-//            },
-//            {
-//                text: "Техподдержка",
-//                url: "https://hubs.ly/H0pk7990"
-//            },
-//            { text: "Блог", url: "https://www.cloudlinux.com/blog" }
-//        ],
-//        sidebar: [
-//          {
-//            title: "Содержание",
-//            collapsable: false,
-//            children: [
-//              "/ru/introduction/",
-              // "/ru/cloudlinux_installation/",
-              // "/ru/limits/",
-              // "/ru/lve_manager/",
-              // "/ru/cloudlinux-os-plus/",
-              // "/ru/cloudlinux_os_components/",
-              // "/ru/command-line_tools/",
-              // "/ru/control_panel_integration/",
-              // "/ru/cloudlinux_os_kernel/",
-//              "/ru/for_cloudlinux_partners/"
-              // "/ru/deprecated/"
-//            ]
-//          }
-//        ]
-//      }
+    }
+  },
+  chainWebpack: (config, isServer) => {
+    config.module.rule('vue').uses.store.get('vue-loader').store.get('options').transformAssetUrls = {
+      video: ['src', 'poster'],
+      source: 'src',
+      img: 'src',
+      image: ['xlink:href', 'href'],
+      a: 'href'
     }
   }
 };
