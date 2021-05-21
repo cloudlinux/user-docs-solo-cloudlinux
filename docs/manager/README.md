@@ -11,9 +11,9 @@ Log in as administrator to get access to the following functionality:
 * <span class="notranslate">Website Monitoring</span> provides access to Website Monitoring and PHP Slow Site Analyzer.
 * <span class="notranslate">X-Ray</span> tab - provides access to X-Ray;
 
-## Website monitoring tool
+## Website Monitoring tool
 
-**Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
+**Website Monitoring tool** (**WMT**) is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
 
 You can configure the Website monitoring tool and Slow Site analyzer and view the daily reports in the CloudLinux Manager -> Website monitoring tab.
 
@@ -22,16 +22,16 @@ There are Main, PHP Site analyzer, and Settings subtabs here.
 :::warning Warning
 For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed. This possibility will be added in the future releases.
 
-You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
+You can turn off the _Website Monitoring_, _PHP Sites Analyzer_ in the _[Settings](/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
 :::
 
 #### Main
 
-This subtab views the latest report (for the previous day) of the Website monitoring tool.
+This subtab views the latest report (for the last 24 hours) of the Website monitoring tool.
 
 ![](/images/WebsiteMonitoringMain.png)
 
-Remember that report is created every 24 hours and all changes in configuration (the _Settings_ tab) or in the list of domains will be applied for the next 24 hours (from midnight).
+Report is regenerated each time the page is loaded, so all changes in configuration (the _Settings_ tab) or in the list of domains will be applied immediately.
 
 * **Total number of requests** - requests that were sent to all domains, existing on the servers
 * **Successful requests** - the number of requests for all domains with ![](/images/Code200.png)
@@ -39,16 +39,28 @@ Remember that report is created every 24 hours and all changes in configuration 
 * **Not started requests due to short check interval** - this metric is used to adjust configuration. If it is not equal 0, an admin should increase the value of Requests sending interval, because the tool does not fit into this interval to send requests to all domains.
 * **Slowest websites in 24h and Websites with most errors in 24h** - in these sections you can find the number of domains that was exposed here.
 
-  ![](/images/TopSlow.png)
+### WMT Settings
+
+To enable or disable **Website Monitoring**, use the following slider.
+
+![](/images/WebsiteMonitoringSlider.png)
+
+* **Email to send daily report** - all email notifications will be sent to this email address
+* **Check every X minutes** - a period in minutes between requests to the same domain
+* **Time allowed for response** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behavior as the `HTTP 408` error
+* **Enable summary notifications** - turn on/off summary daily email report notifications
+* **Enable alert notifications** - turn on/off immediate alert email notifications
+* **Domains and URLs Ignore List** - domains and URLs that will not be requested and displayed in reports; supported formats: `example.com, http://example.com`
+
 
 ### WMT CLI
 
-The `wmt-api` utility allows to manage Website Monitoring tool via CLI.
+The `wmt-api-solo` utility allows to manage Website Monitoring tool via CLI.
 
 **Usage**
 
 ```
-# /usr/share/web-monitoring-tool/wmtbin/wmt-api [command] [--optional arguments]
+# /usr/share/web-monitoring-tool/wmtbin/wmt-api-solo [command] [--optional arguments]
 ```
 
 **Optional arguments**:
@@ -61,22 +73,48 @@ The `wmt-api` utility allows to manage Website Monitoring tool via CLI.
 
 | | |
 |-|-|
-|`config-change`|set the WMT configuration using the JSON string that follows|
+|`config-change`|set the WMT configuration using the JSON string that follows the command|
 |`config-get`|get the WMT configuration as JSON|
-|`email-get`|get WMT email from the config file|
-|`report-generate`|Generate a report JSON file|
-|`send-clickhouse`|Send the summary report to ClickHouse|
-|`start`|Start the WMT system|
-|`status`|Check the status of the WMT system|
-|`stop`|Stop the WMT system|
+|`report-get`|generate a report for last 24 hours|
+|`send-clickhouse`|send the summary report to the ClickHouse|
+|`start`|start the WMT system|
+|`status`|check the status of the WMT system|
+|`stop`|stop the WMT system|
 
-Example of the `/usr/share/web-monitoring-tool/wmtbin/wmt-api` command usage:
+Example of the `/usr/share/web-monitoring-tool/wmtbin/wmt-api-solo` command usage:
 
 ```
-# /usr/share/web-monitoring-tool/wmtbin/wmt-api -config-change "{\"ping_connections\":8,\"report_top\":5,\"report_email\":\"user@example.com\"}"
+# /usr/share/web-monitoring-tool/wmtbin/wmt-api-solo --config-change "{\"ping_timeout\":10,\"ping_interval\":5,\"report_email\":\"user@example.com\"}"
 ```
 
 This way you can set all or only certain parameters.
+
+### WMT email notifications
+
+There are two types of emails sent by the Web Monitoring tool: **daily email report** and **alert**.
+
+#### Daily email report
+
+The summary report with all data for the previous day. It is created and sent every day at midnight.
+
+
+**Example of the Web Monitoring tools daily report**.
+
+![](/images/Webmonitoringtoolemail.png)
+
+#### Alert
+
+Domains that are responding with non-200 status code will be re-requested in 5 minutes or in the `ping_interval` setting (in case it is less than 5 minutes).
+
+If domains are still responding with non-200 status code - Web Monitoring tool will inform about such domains with immediate alert email.
+
+**Example of the Web monitoring tools immediate alert**.
+
+![](/images/Webmonitoringtoolalert.png)
+
+:::tip Note
+The next alert with domains will not be sent in less than 6 hours. Also, if the alerted domain is still responding with non-200 status code even after 6 hours - it will not be re-alerted until it responds with 200 status code at least once and becomes unavailable again.
+:::
 
 ## PHP Slow Site analyzer
 
@@ -87,24 +125,9 @@ This is an example of a report from the Slow Site analyzer. The report shows the
 You can find the explanation of the **Slow requests density in period** [here](/lve_manager/#what-is-the-density-threshold).
 
 
-#### Settings
+#### PHP Slow Site analyzer settings
 
-Here, an admin can configure the Website monitoring and the PHP Site analyzer.
-
-:::tip Note
-All settings which was changed after starting Website monitoring and Slow site analyzer will be applied for the next 24h (from midnight).
-:::
-
-To enable or disable **Website monitoring**, use the following slider.
-
-![](/images/WebsiteMonitoringSlider.png)
-
-* **Top N slow websites to show** - this number (N) will be used to select the top N domains from the list of all domains, sorted by response duration (Slowest websites list). And this number also will be used to select the top N domains from the list of all domains, sorted by amount of errors (Websites with most errors list).
-* **Requests sending interval** - this is a period in minutes between requests to the same domain.
-* **Domain response timeout** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behaviour as the `HTTP 408` error.
-* **Concurrent requests limit** - how many concurrent requests can be done by the Website Monitoring tool.
-
-To enable or disable the **Slow site analyzer**, use the following slider.
+To enable or disable the **Slow Site analyzer**, use the following slider.
 
 ![](/images/WebsiteMonitoringSlider1.png)
 
@@ -122,15 +145,9 @@ A density threshold is a numerical measure of some type of correlation, meaning 
 
 Slow requests that represent bursts of activity and are weakly related to all activity per domain typically have a low density and will be weeded out.
 
-#### Email notifications
+#### PHP Slow Site analyzer notifications
 
-Email notifications are created by the Web monitoring tools. 
-
-**Example of the Web monitoring tools report**.
-
-![](/images/EmailNotifications.png)
-
-**Example of the PHP Slow site analyzer report**.
+**Example of the PHP Slow Site analyzer report**.
 
 ![](/images/SlowSiteAnalyzerEmailNotifications.png)
 
