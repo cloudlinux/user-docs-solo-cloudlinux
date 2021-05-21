@@ -12,14 +12,14 @@ Log in as administrator to get access to the following functionality:
 * <span class="notranslate">X-Ray</span> tab - provides access to X-Ray;
 
 ## Activation
-To start using CloudLinux Manager, it must be activated with your CLN activation key.
+To start using CloudLinux Manager, it must be activated with your CloudLinux OS Solo activation key.
 
 In order to activate CloudLinux Manager features: 
 
 * Enter your CLN activation key if you already have it 
     ![](/images/cloudlinuxmanageractivation.png)
   
-    More about CLN activation key [CLN registration](/cln/)
+    More about CloudLinux OS Solo and how to get the license [here](https://lp.cloudlinux.com/cloudlinux-os-solo)
 
 * Sign up and get 30-days trial license
 

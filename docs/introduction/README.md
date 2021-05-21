@@ -54,7 +54,7 @@ We pre-installed a couple of useful features in our distribution.
 ### How can I try your distribution before paying for it?
 
 We provide trial licenses for 30 days. You can get your trial key in two ways:
-1. On CLN website, see [CLN registration](/cln/) section.
+1. On CloudLinux OS Solo main page, see [CloudLinux OS Solo](https://lp.cloudlinux.com/cloudlinux-os-solo).
 2. In CloudLinux Manager plugin, see [getting trial key](/manager/#activation) section.
 
 Trial key must be entered during installation.
