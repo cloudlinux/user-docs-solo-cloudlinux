@@ -4,7 +4,7 @@
 
 <span class="notranslate">CloudLinux Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor all CloudLinux OS Solo features.
 
-![](/images/lvemanagermainmenu_zoom80.png)
+![](/images/solo_lvemanagermainmenu.png)
 
 Log in as administrator to get access to the following functionality:
 
@@ -118,57 +118,29 @@ The next alert with domains will not be sent in less than 6 hours. Also, if the 
 
 ## PHP Slow Site analyzer
 
-![](/images/WebsiteMonitoringPHPSiteAnalyzer.png)
+**PHP Slow Site analyzer** (**SSA**) is a tool that generates daily reports for the server administrator with information about the top N slow PHP-based URLs for all domains. The Slow Site analyzer tracks all PHP-based requests and selects slow ones by specific rules.
+
+![](/images/solo_SlowSiteAnalyzerReport.png)
 
 This is an example of a report from the Slow Site analyzer. The report shows the number of slow requests per domain and its URLs and the average duration of each slow URL.
 
-You can find the explanation of the **Slow requests density in period** [here](/lve_manager/#what-is-the-density-threshold).
 
+### SSA settings
 
-#### PHP Slow Site analyzer settings
-
-To enable or disable the **Slow Site analyzer**, use the following slider.
+To enable or disable the **Slow Site analyzer**, use the following slider:
 
 ![](/images/WebsiteMonitoringSlider1.png)
 
-* **Top N slow websites to show** - this number (N) will be used to select the top N domains from the list of all domains, marked as slow.
-* **Top slow URLs** - this number (N) will be used to select the top N URLs for each domain, marked as slow.
-* **Slow request duration** - the duration of a request in seconds. 
-* **Slow requests number & Analysis time** - how many requests with a certain request duration should be done in time to mark the domain as a slow one.
-* **Slow requests density threshold** can be in the interval [0..1], by default it is 0.8. The **density threshold** can be disabled. And the **Domains and URLs Ignore List** can be specified.
+The following settings can be changed through the UI:
 
-#### What is the density threshold?
+![](/images/solo_SlowSiteAnalyzerSettings.png)
 
-We try to find the most interesting requests for the optimisation from all number of requests to domains during 24 hours. The _Density threshold_ parameter helps to find the most visited URLs and the most popular requests. 
-
-A density threshold is a numerical measure of some type of correlation, meaning the power of the statistical relationship between slow requests and all requests to the domain. If this parameter is enabled then the resulting table will contain slow requests that have exceeded the specified threshold. Requests with the highest density are usually the most distributed per day and are considered valuable to users, thus interesting for optimization.
-
-Slow requests that represent bursts of activity and are weakly related to all activity per domain typically have a low density and will be weeded out.
-
-#### PHP Slow Site analyzer notifications
-
-**Example of the PHP Slow Site analyzer report**.
-
-![](/images/SlowSiteAnalyzerEmailNotifications.png)
+* **Enable summary notifications** - turn on/off summary daily email report notifications;
+* **Top slow URLs** - this number (N) will be used to select the top N URLs for each domain, marked as slow;
+* **Slow request duration** - the duration of a request in seconds. If the request duration was less than specified in this setting then this request will not be marked as slow;
+* **Domains and URLs Ignore List** - domains and URLs that will not be displayed in reports.
 
 
-#### FAQ
-
-Q: Does this feature consume a lot server resources for collecting website and PHP data? If I enable it can this slow down the server?
-
-A: The load depends on the number of websites and the Website monitoring tool settings. Basically, the Website monitoring should not create a significant load and you can keep it always on.
-
----
-
-Q: Can I change the default value to 10, for example for the "Top N slow websites to show" setting?
-
-A: This number is simply the number of the slowest responding sites. All sites are sampled during the day. When generating a report, all sites' responses are sorted by response time from highest to lowest, and to make the report readable, only the first N sites are taken. You can specify N as all existing sites or only the 5 slowest. This number does not affect the server load, it only affects the report that will be visible in the UI or emailed to the administrator.
-
----
-
-Q: What would you recommend: to enable the Website monitoring tool for some days and then disable or I can keep it always turned on?
-
-A: The load depends on the number of websites and the Website monitoring tool settings. Basically, the Website monitoring tool should not create a significant load and you can keep it always on.
 
 ### SSA CLI
 
@@ -199,95 +171,82 @@ The `cloudlinux-ssa-manager` utility allows to manage Slow Site analyzer via CLI
 
 You can use the `-h`, `--help` option with commands to get a full list of available optional arguments for each command.
 
-Example of the `/usr/sbin/cloudlinux-ssa-manager set-config --help` command output:
+Example of the `/usr/sbin/cloudlinux-ssa-manager get-report | json_reformat` command output:
 
 ```
-# /usr/sbin/cloudlinux-ssa-manager set-config --help
-usage: cloudlinux-ssa-manager set-config [-h]
-                                         [--domains-number DOMAINS_NUMBER]
-                                         [--urls-number URLS_NUMBER]
-                                         [--requests-duration REQUESTS_DURATION]
-                                         [--request-number REQUEST_NUMBER]
-                                         [--time TIME]
-                                         [--correlation CORRELATION]
-                                         [--correlation-coefficient CORRELATION_COEFFICIENT]
-                                         [--ignore-list IGNORE_LIST]
-optional arguments:
-  -h, --help            show this help message and exit
-  --domains-number DOMAINS_NUMBER
-                        Size of TOP list for slow domains
-  --urls-number URLS_NUMBER
-                        Size of TOP list for slow urls
-  --requests-duration REQUESTS_DURATION
-                        The threshold value of request duration in seconds
-  --request-number REQUEST_NUMBER
-                        The threshold value of slow requests number in the
-                        period of time to mark URL as a slow one
-  --time TIME           Period of time in hours required to analyze these
-                        requests
-  --correlation CORRELATION
-                        Flag to enable or disable correlation
-  --correlation-coefficient CORRELATION_COEFFICIENT
-                        The threshold value of correlation coefficient
-  --ignore-list IGNORE_LIST
-                        List of URLs or domains that should not be included in
-                        the daily report
+# /usr/sbin/cloudlinux-ssa-manager get-report | json_reformat
+{
+    "result": "success",
+    "date": "18.05.2021",
+    "domains": [
+        {
+            "name": "user1.com",
+            "slow_urls": 2,
+            "slow_reqs": 23,
+            "total_reqs": 24,
+            "urls": [
+                {
+                    "name": "http://user1.com/",
+                    "reqs_num": 13,
+                    "average_duration": 3004509
+                },
+                {
+                    "name": "http://user1.com/info.php",
+                    "reqs_num": 10,
+                    "average_duration": 3641018
+                }
+            ]
+        },
+        {
+            "name": "user2.com",
+            "slow_urls": 1,
+            "slow_reqs": 12,
+            "total_reqs": 12,
+            "urls": [
+                {
+                    "name": "http://user2.com/",
+                    "reqs_num": 12,
+                    "average_duration": 3010571
+                }
+            ]
+        }
+    ]
+}
 ```
+
+Example of the `/usr/sbin/cloudlinux-ssa-manager set-config --requests-duration 2.5` command output:
+
+```
+# /usr/sbin/cloudlinux-ssa-manager set-config --requests-duration 2.5
+{"result": "success"}
+```
+
+
+### SSA email notifications
+
+SSA sends email reports daily if the "**Enable summary notifications**" setting is turned on.
+
+**Example of the PHP Slow Site analyzer report**:
+
+![](/images/solo_SlowSiteAnalyzerEmailNotifications.png)
+
 
 ## X-Ray
 
-* [Description](#description)
-* [Installation](#installation)
-* [How to manage <span class="notranslate">X-Ray</span>](#how-to-manage-x-ray)
-* [<span class="notranslate">X-Ray</span> client](#x-ray-client)
-* [<span class="notranslate">X-Ray</span> service](#x-ray-agent)
+* [Description](/manager/#description)
+* [How to manage X-Ray](/manager/#how-to-manage-x-ray)
+* [Managing tracing task](/manager/#managing-tracing-task)
+* [Managing continuous tasks](/manager/#managing-continuous-tasks)
+* [End-user X-Ray plugin](/manager/#end-user-x-ray-plugin)
+* [X-Ray client](/manager/#x-ray-client)
+* [X-Ray service](/manager/#x-ray-agent)
+* [FAQ](/manager/#faq)
 
 ### Description
 
-<span class="notranslate">X-Ray</span> is a tool developed for website performance monitoring and performance issues detection.
+X-Ray is a tool developed for website performance monitoring and performance issues detection.
 
-<span class="notranslate">X-Ray</span> can gather and visualize information about top N slowest system functions, external requests, software modules and database queries of the client’s website.
-
-### Installation
-
-1. For instant X-Ray activation, run the following command:
-
-   <div class="notranslate">
-
-    ```
-    # rhn_check
-    ```
-    </div>
-
-    If the `rhn_check` command is not found, run the following command:
-
-    <div class="notranslate">
-
-    ```
-    # yum install rhn-check rhn-setup
-    ```
-    </div>
-
-2. Then install the <span class="notranslate">`alt-php-xray`</span> package
-
-    * Via user interface
-        * Go to the <span class="notranslate">_X-Ray_</span> tab.
-        * Click <span class="notranslate">_Install_</span> to start installation.
-
-        ![](/images/XRayUI.png)
-
-    * Via SSH by running the following command:
-  
-    <div class="notranslate">
-
-    ```
-    # yum install lvemanager alt-php-xray
-    ```
-    </div>
-
-3. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
-
-![](/images/XRayStartTracing.png)
+X-Ray can gather and visualize information about top N slowest system functions, external requests, software modules and database queries of the website.
 
 ### How to manage X-Ray
 
@@ -366,7 +325,7 @@ Click ![](/images/XRayView.png) to open a list of collected requests.
 
 #### Tracing tasks
 
-![](/images/XRayCollectedRequests.png)
+![](/images/solo_XRayCollectedRequests.png)
 
 The slowest request is highlighted.
 
@@ -374,7 +333,6 @@ The slowest request is highlighted.
 
 * <span class="notranslate">**Total**</span> displays how many requests were collected according to tasks requirements.
 * <span class="notranslate">**Pending**</span> displays how many of collected requests are not visible in the table yet.
-* <span class="notranslate">**Throttled**</span> displays the number of requests during the execution of which the LVE limits were exceeded.
 * <span class="notranslate">**Slow**</span> displays the number of requests lasting more than one second.
 
 There are filters for the request types and the indicator of a filter used now.
@@ -383,7 +341,7 @@ There are filters for the request types and the indicator of a filter used now.
 
 If slow requests were not detected during the tracing task, the following is displayed. Here, you can also view all requests.
 
-![](/images/RecordedSession.png)
+![](/images/solo_RecordedSession.png)
 
 
 <span class="notranslate">X-Ray</span> collects the following data for each request:
@@ -483,7 +441,7 @@ You can find automatically created tasks in the _Tracing tasks_ tab marked as _A
 
 ![](/images/XRayContinuousTracingTasksListCreated.png)
 
-The [statuses for automatically created tasks](/cloudlinux-os-plus/#tracing-status) are the same as for tracing task.
+The [statuses for automatically created tasks](/manager/#tracing-status) are the same as for tracing task.
 
 To view detailed info about an automatically created task, click ![](/images/XRayView1.png). You will get requests grouped by hour.
 
@@ -504,14 +462,14 @@ The following data is collected for each request:
 
 Stopping automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
 
-To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](/manager/#creating-a-new-continuous-task).
 
 
 #### Deleting automatic tracing task
 
 Deleting automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
 
-To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](/manager/#creating-a-new-continuous-task).
 
 
 #### Continuous task daily report
@@ -532,28 +490,46 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 
     ![](/images/XRayContinuousTaskDaylyReportRequestDetails.png)
 
-### X-Ray automated throttling detection
 
-The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU during the HTTP request execution. 
+### End-user X-Ray plugin
 
-If CPU limiting was detected for a particular request, it is indicated in the X-Ray UI that the system itself has slowed down the request processing and this is apparently not a performance issue in the PHP code.
+The end-user X-Ray plugin is enabled by default on CloudLinux OS Solo.
 
-Requests with exceeded LVE limits are indicated in the administrator/user interface of the X-Ray plugin in the following way.
+![](/images/solo_XRayEndUserPluginUIIcon.png)
 
-![](/images/RecordedSessions.png)
+#### How to manage the end-user X-Ray plugin
 
-Requests with exceeded LVE limits are also marked if the administrator views the request.
+The web interface of the end-user X-Ray plugin is almost the same as the X-Ray administrator interface.
+ 
+![](/images/XRayEndUserUI.png)
 
-![](/images/LVEFaultsMarker.png)
+But there are some differences and they are described further.
 
-Requests with exceeded LVE limits are marked in the PDF report as well.
+* End-users can create tasks only for their domains from the drop-down list:
+    ![](/images/XRayEndUserUIStart.png)
+* To specify URL or wildcard, end-users should use the input field next to the domain:
+    ![](/images/XRayEndUserUiSpecifyURL.png)
+ 
+You can read about all other basic interface elements and managing tracing tasks in the [Managing tracing task section](/manager/#managing-tracing-task).
 
-![](/images/XRayMonitoringReport.png)
+:::warning Note
+Tracing tasks created by an end-user will also be displayed in the administrator interface and administrators can manage the end-user's tasks the same way as they manage their own. At the same time, tasks created by the administrator or other end-users will not be displayed in the UI of the current user.
+:::
+
+#### End-user X-Ray plugin limitations
+
+* The end-user X-Ray plugin does not support creating continuous tasks.
+* The administrator and the end-user can’t run the tracing task for the same Domain/URL at the same time. Once the administrator started a specific tracing task, the end-user will not be able to duplicate it. And the same is true for the administrators – they will just see the running task for the specific domain and see the notification that they're trying to create a tracing task with a duplicated URL.
+* If continuous tracing is enabled for the domain, the end-user will not be able to create a new task for this domain because the same rule works - it will be a duplicate of the existing tracing tasks. The next warning will appear:
+
+    ![](/images/XRayEndUserUIWarning.png)
+
+    To solve this, the existing running tasks for the same Domain/URL should be stopped or completed. You can find more details about this in the [FAQ](/manager/#what-should-i-do-if-i-see-the-warning-task-is-duplicated-by-url).
 
 
 ### X-Ray client
 
-<span class="notranslate">X-Ray</span> client is a PHP extension named <span class="notranslate">`xray.so`</span>. It analyzes the processing time of the entire request and its parts and then sends the data to the <span class="notranslate">X-Ray</span> agent.
+X-Ray client is a PHP extension named `xray.so`. It analyzes the processing time of the entire request and its parts and then sends the data to the X-Ray agent.
 
 #### List of supported PHP versions
 
