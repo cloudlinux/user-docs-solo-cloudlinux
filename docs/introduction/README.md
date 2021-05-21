@@ -15,7 +15,9 @@ We believe that this distribution will be useful for you if:
    CloudLinux OS Solo provides a set of tools for website monitoring and performance tracking out-of-box;
 2. as a service provider you sell VPS servers and some of your customers require OS with extensive features 
    for better security, support, and performance.
-3. as a customer you want to be sure that [product has 24/7 technical support](https://cloudlinux.zendesk.com/).
+
+In any case we provide you [professional support 24/7](https://cloudlinux.zendesk.com/) 
+to resolve all issues you may have with distro.
 
 ### CloudLinux OS Solo features
  
