@@ -48,7 +48,7 @@ There are Main, PHP Site analyzer, and Settings subtabs [here](/manager/#main).
 :::warning Warning
 For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed.
 
-You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[WMT Settings](/manager/#wmt-settings)_ and _[PHP Site Analyzer Settings](/manager/#php-slow-site-analyzer-settings)_ subtabs, so sites statistics will stop collecting and there will be no additional load on the server.
+You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/manager/#wmt-settings)_ tabs, so sites statistics will stop collecting and there will be no additional load on the server.
 :::
 
 #### Main
