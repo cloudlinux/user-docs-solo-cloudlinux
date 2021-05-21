@@ -46,7 +46,7 @@ You can configure the Website monitoring tool and [Slow Site analyzer](/manager/
 There are Main, PHP Site analyzer, and Settings subtabs [here](/manager/#main).
 
 :::warning Warning
-For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed. This possibility will be added in the future releases.
+For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed.
 
 You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[WMT Settings](/manager/#wmt-settings)_ and _[PHP Site Analyzer Settings](/manager/#php-slow-site-analyzer-settings)_ subtabs, so sites statistics will stop collecting and there will be no additional load on the server.
 :::
@@ -71,7 +71,7 @@ To enable or disable **Website monitoring**, use the following slider.
 
 ![](/images/WebsiteMonitoringSlider.png)
 
-* **Email to send daily report** - all email notifications will be sent to this email address
+* **Email to send report** - all email notifications will be sent to this email address
 
 :::warning Warning
 If email is not specified, all [notifications](/manager/#wmt-email-notifications) will be sent to control panel administrator`s email.
