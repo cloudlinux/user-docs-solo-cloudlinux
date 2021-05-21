@@ -13,18 +13,19 @@ Log in as administrator to get access to the following functionality:
 
 
 ## Activation
+
 To start using CloudLinux Manager, it must be activated with your CloudLinux OS Solo activation key.
 
-In order to activate CloudLinux Manager features: 
+In order to activate CloudLinux Manager features, follow the next steps: 
 
 * Enter your CLN activation key if you already have it 
     ![](/images/cloudlinuxmanageractivation.png)
   
-    More about CloudLinux OS Solo and how to get the license [here](https://lp.cloudlinux.com/cloudlinux-os-solo)
+    You can read more about CloudLinux OS Solo and how to get the license [here](https://lp.cloudlinux.com/cloudlinux-os-solo)
 
 * Sign up and get 30-days trial license
 
-    You will be asked to provide information about yourself by filling out the form
+    Fill out the next form
 
     ![](/images/cloudlinuxmanageractivationsignupform.png)
 
@@ -34,21 +35,20 @@ In order to activate CloudLinux Manager features:
 
     :::tip Note
     After submitting the registration form you will get a trial license valid for next 24 hours.
-    To prolong license for 30 days, please, follow the activation instructions sent to email specified during
+    To prolong license for 30 days, please follow the activation instructions sent to email specified during the
     registration.
     :::
 
-## Website monitoring tool
+## Website Monitoring tool
 
-**Website monitoring tool** is a tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
+**Website Monitoring tool (WMT)**  is a tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The Website Monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
 
-You can configure the Website monitoring tool and [Slow Site analyzer](/manager/#php-slow-site-analyzer) and view the daily reports in the CloudLinux Manager -> Website monitoring tab.
+You can configure the Website Monitoring tool and the [Slow Site analyzer](/manager/#php-slow-site-analyzer) and view the daily reports in the CloudLinux Manager -> Website monitoring tab.
 
 There are Main, PHP Site analyzer, and Settings subtabs [here](/manager/#main).
 
 :::warning Warning
 For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed.
-
 You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/manager/#wmt-settings)_ tabs, so sites statistics will stop collecting and there will be no additional load on the server.
 :::
 
@@ -76,7 +76,7 @@ To enable or disable **Website Monitoring**, use the following slider.
 * **Email to send report** - all email notifications will be sent to this email address
 
 :::warning Warning
-If email is not specified, all [notifications](/manager/#wmt-email-notifications) will be sent to control panel administrator`s email.
+If email is not specified, all [notifications](/manager/#wmt-email-notifications) will be sent to control panel administrator's email.
 :::
 
 ![](/images/Webmonitoringtoolsettings.png)
