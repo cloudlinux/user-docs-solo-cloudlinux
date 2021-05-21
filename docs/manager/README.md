@@ -118,7 +118,7 @@ The next alert with domains will not be sent in less than 6 hours. Also, if the 
 
 ## PHP Slow Site analyzer
 
-**PHP Slow Site analyzer** (**SSA**) is tool that generates daily reports for the server administrator with information about the top N slow PHP-based URLs for all domains. Slow Site analyzer tracks all PHP-based requests and selects slow ones by certain rules.
+**PHP Slow Site analyzer** (**SSA**) is a tool that generates daily reports for the server administrator with information about the top N slow PHP-based URLs for all domains. The Slow Site analyzer tracks all PHP-based requests and selects slow ones by specific rules.
 
 ![](/images/solo_SlowSiteAnalyzerReport.png)
 
@@ -131,7 +131,7 @@ To enable or disable the **Slow Site analyzer**, use the following slider:
 
 ![](/images/WebsiteMonitoringSlider1.png)
 
-Following settings may be changed through UI:
+The following settings can be changed through the UI:
 
 ![](/images/solo_SlowSiteAnalyzerSettings.png)
 
@@ -224,29 +224,29 @@ Example of the `/usr/sbin/cloudlinux-ssa-manager set-config --requests-duration 
 
 ### SSA email notifications
 
-SSA sends Email reports daily if "**Enable summary notifications**" setting turn on.
+SSA sends email reports daily if the "**Enable summary notifications**" setting is turned on.
 
-**Example of the PHP Slow Site analyzer report:**
+**Example of the PHP Slow Site analyzer report**:
 
 ![](/images/solo_SlowSiteAnalyzerEmailNotifications.png)
 
 
 ## X-Ray
 
-* [Description](#description)
-* [How to manage <span class="notranslate">X-Ray</span>](#how-to-manage-x-ray)
-* [Managing tracing task](#managing-tracing-task)
-* [Managing continuous tasks](#managing-continuous-tasks)
-* [End-user <span class="notranslate">X-Ray</span> plugin](#end-user-x-ray-plugin)
-* [<span class="notranslate">X-Ray</span> client](#x-ray-client)
-* [<span class="notranslate">X-Ray</span> service](#x-ray-agent)
-* [FAQ](#faq)
+* [Description](/manager/#description)
+* [How to manage X-Ray](/manager/#how-to-manage-x-ray)
+* [Managing tracing task](/manager/#managing-tracing-task)
+* [Managing continuous tasks](/manager/#managing-continuous-tasks)
+* [End-user X-Ray plugin](/manager/#end-user-x-ray-plugin)
+* [X-Ray client](/manager/#x-ray-client)
+* [X-Ray service](/manager/#x-ray-agent)
+* [FAQ](/manager/#faq)
 
 ### Description
 
-<span class="notranslate">X-Ray</span> is a tool developed for website performance monitoring and performance issues detection.
+X-Ray is a tool developed for website performance monitoring and performance issues detection.
 
-<span class="notranslate">X-Ray</span> can gather and visualize information about top N slowest system functions, external requests, software modules and database queries of the website.
+X-Ray can gather and visualize information about top N slowest system functions, external requests, software modules and database queries of the website.
 
 ### How to manage X-Ray
 
@@ -441,7 +441,7 @@ You can find automatically created tasks in the _Tracing tasks_ tab marked as _A
 
 ![](/images/XRayContinuousTracingTasksListCreated.png)
 
-The [statuses for automatically created tasks](#tracing-status) are the same as for tracing task.
+The [statuses for automatically created tasks](/manager/#tracing-status) are the same as for tracing task.
 
 To view detailed info about an automatically created task, click ![](/images/XRayView1.png). You will get requests grouped by hour.
 
@@ -462,14 +462,14 @@ The following data is collected for each request:
 
 Stopping automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
 
-To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](#creating-a-new-continuous-task).
+To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](/manager/#creating-a-new-continuous-task).
 
 
 #### Deleting automatic tracing task
 
 Deleting automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
 
-To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](#creating-a-new-continuous-task).
+To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](/manager/#creating-a-new-continuous-task).
 
 
 #### Continuous task daily report
@@ -493,7 +493,7 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 
 ### End-user X-Ray plugin
 
-The end-user X-Ray plugin is enabled by default on CloudLinux Solo.
+The end-user X-Ray plugin is enabled by default on CloudLinux OS Solo.
 
 ![](/images/solo_XRayEndUserPluginUIIcon.png)
 
@@ -510,7 +510,7 @@ But there are some differences and they are described further.
 * To specify URL or wildcard, end-users should use the input field next to the domain:
     ![](/images/XRayEndUserUiSpecifyURL.png)
  
-You can read about all other basic interface elements and managing tracing tasks in the [Managing tracing task section](#managing-tracing-task).
+You can read about all other basic interface elements and managing tracing tasks in the [Managing tracing task section](/manager/#managing-tracing-task).
 
 :::warning Note
 Tracing tasks created by an end-user will also be displayed in the administrator interface and administrators can manage the end-user's tasks the same way as they manage their own. At the same time, tasks created by the administrator or other end-users will not be displayed in the UI of the current user.
@@ -519,17 +519,17 @@ Tracing tasks created by an end-user will also be displayed in the administrator
 #### End-user X-Ray plugin limitations
 
 * The end-user X-Ray plugin does not support creating continuous tasks.
-* The administrator and the end-user can’t run the tracing task for the same Domain/URL at the same time. Once, the administrator started a specific tracing task, the end-user will not be able to duplicate it. And the same is true for the administrators – they will just see the running task for the specific domain and see the notification that they're trying to create a tracing task with a duplicated URL.
+* The administrator and the end-user can’t run the tracing task for the same Domain/URL at the same time. Once the administrator started a specific tracing task, the end-user will not be able to duplicate it. And the same is true for the administrators – they will just see the running task for the specific domain and see the notification that they're trying to create a tracing task with a duplicated URL.
 * If continuous tracing is enabled for the domain, the end-user will not be able to create a new task for this domain because the same rule works - it will be a duplicate of the existing tracing tasks. The next warning will appear:
 
     ![](/images/XRayEndUserUIWarning.png)
 
-    To solve this, the existing running tasks for the same Domain/URL should be stopped or completed. You can find more details about this in the [FAQ](#what-should-i-do-if-i-see-the-warning-task-is-duplicated-by-url).
+    To solve this, the existing running tasks for the same Domain/URL should be stopped or completed. You can find more details about this in the [FAQ](/manager/#what-should-i-do-if-i-see-the-warning-task-is-duplicated-by-url).
 
 
 ### X-Ray client
 
-<span class="notranslate">X-Ray</span> client is a PHP extension named <span class="notranslate">`xray.so`</span>. It analyzes the processing time of the entire request and its parts and then sends the data to the <span class="notranslate">X-Ray</span> agent.
+X-Ray client is a PHP extension named `xray.so`. It analyzes the processing time of the entire request and its parts and then sends the data to the X-Ray agent.
 
 #### List of supported PHP versions
 
