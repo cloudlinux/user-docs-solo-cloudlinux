@@ -19,8 +19,6 @@ We believe that this distribution will be useful for you if:
 In any case we provide you [professional support 24/7](https://cloudlinux.zendesk.com/) 
 to resolve all issues you may have with distro.
 
-3. as a customer you want to be sure that [product has .
-
 ### CloudLinux OS Solo features
  
 We've pre-installed a couple of useful features in our distribution.

@@ -5,7 +5,7 @@
 
 ## Hardware compatibility
 
-CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptions. 
+CloudLinux OS Solo supports all the hardware supported by RHEL/CentOS, with few exceptions. 
 Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
 :::warning
