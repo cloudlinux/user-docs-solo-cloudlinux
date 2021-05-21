@@ -195,7 +195,9 @@ Unlike [Fresh installation](./#fresh-installation), converting requires CloudLin
 Please refer to the [guide](/activation/) to get activation key.
 :::
 
-If you have an activation key, run the following commands:
+### Downloading and running conversion script
+
+If you already have an activation key, run the following commands:
 ```
 yum install wget -y
 wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
@@ -242,4 +244,6 @@ Here's what the cldeploy script does when you run it:
 * Installs CloudLinux Manager for cPanel Solo.
 :::
 
+### Next steps
 
+Reboot your system, login and check EULA which is located in `/usr/share/cloudlinux-release/EULA`.

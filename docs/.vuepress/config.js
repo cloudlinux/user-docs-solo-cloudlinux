@@ -165,6 +165,7 @@ module.exports = {
               "/introduction/",
               "/installation/",
               "/activation/",
+              "/administration/",
               "/manager/",
             ]
           }
