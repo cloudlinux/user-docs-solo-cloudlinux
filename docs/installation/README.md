@@ -192,7 +192,7 @@ It is easy to convert your existing installation by cldeploy script. The process
 
 :::warning
 Unlike [Fresh installation](./#fresh-installation), converting requires CloudLinux OS Solo license. 
-Please refer to the [CLN Guide](/cln/) to get activation key.
+Please refer to the [guide](/activation/) to get activation key.
 :::
 
 If you have an activation key, run the following commands:
