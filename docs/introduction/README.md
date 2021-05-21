@@ -53,8 +53,9 @@ We've pre-installed a couple of useful features in our distribution.
 
 
 We provide trial licenses for 30 days. You can get your trial key in two ways:
-1. On CloudLinux OS Solo main page, see [CloudLinux OS Solo](https://lp.cloudlinux.com/cloudlinux-os-solo).
-2. In CloudLinux Manager plugin, see [getting trial key](/manager/#activation) section.
+
+1. On the CloudLinux OS Solo main page, see [CloudLinux OS Solo](https://lp.cloudlinux.com/cloudlinux-os-solo).
+2. In the CloudLinux Manager plugin, see the [Getting trial key](/manager/#activation) section.
 
 
 The trial key must be entered during installation.
