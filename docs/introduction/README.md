@@ -28,7 +28,7 @@ We've pre-installed a couple of useful features in our distribution.
   CloudLinux Manager is a plugin which allows you to control all the
   CloudLinux settings from an easy-to-use web UI integrated into your control panel. 
   
-  The sub-modules you can find in CloudLinux Manager are Website Monitoring tool, PHP Slow Site Analyzer and X-Ray.
+  The sub-modules you can find in CloudLinux Manager are Website Monitoring tool, PHP Slow Site analyzer, and X-Ray.
 
   [See more](/manager/).
 
@@ -42,7 +42,7 @@ We've pre-installed a couple of useful features in our distribution.
 
   [See more](/manager/#website-monitoring-tool).
 
-* **PHP Slow Site Analyzer**
+* **PHP Slow Site analyzer**
 
   PHP Slow Site analyzer (SSA) is a tool that generates daily reports for the server administrator 
   with information about the top N slow PHP-based URLs for all domains.
