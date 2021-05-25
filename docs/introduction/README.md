@@ -28,7 +28,7 @@ We've pre-installed a couple of useful features in our distribution.
   CloudLinux Manager is a plugin which allows you to control all the
   CloudLinux settings from an easy-to-use web UI integrated into your control panel. 
   
-  The sub-modules you can find in CloudLinux Manager are X-Ray (PHP Slow Site Analyzer) and Website Monitoring tool.
+  The sub-modules you can find in CloudLinux Manager are Website Monitoring tool, PHP Slow Site Analyzer and X-Ray.
 
   [See more](/manager/).
 
@@ -42,17 +42,25 @@ We've pre-installed a couple of useful features in our distribution.
 
   [See more](/manager/#website-monitoring-tool).
 
-* **X-Ray**
+* **PHP Slow Site Analyzer**
 
-  X-Ray or Slow Sites analyzer is a tool developed for website performance monitoring and performance issues detection.
+  PHP Slow Site analyzer (SSA) is a tool that generates daily reports for the server administrator 
+  with information about the top N slow PHP-based URLs for all domains.
 
-  X-Ray can gather and visualize information about top N slowest system functions, external requests, 
-  software modules and database queries of the client’s website.
+  The Slow Site analyzer tracks all PHP-based requests and selects slow ones by specific rules.
 
   [See more](/manager/#php-slow-site-analyzer).
 
-### How can I try your distribution before paying for it?
+* **X-Ray**
 
+  X-Ray is a tool developed for website performance monitoring and performance issues detection.
+
+  X-Ray can gather and visualize information about top slowest system functions, external requests, 
+  software modules and database queries of the client’s PHP website.
+
+  [See more](/manager/#x-ray).
+
+### How can I try your distribution before paying for it?
 
 We provide trial licenses for 30 days. You can get your trial key in two ways:
 
