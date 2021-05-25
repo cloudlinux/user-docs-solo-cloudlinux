@@ -16,8 +16,8 @@ We believe that this distribution will be useful for you if:
 2. as a service provider you sell VPS servers and some of your customers require OS with extensive features 
    for better security, support, and performance.
 
-In any case we provide you [professional support 24/7](https://cloudlinux.zendesk.com/) 
-to resolve all issues you may have with distro.
+In any case we provide you [24/7 professional support](https://cloudlinux.zendesk.com/)
+to resolve any issues related to CloudLinux OS, its unique components and kernel.
 
 ### CloudLinux OS Solo features
  
