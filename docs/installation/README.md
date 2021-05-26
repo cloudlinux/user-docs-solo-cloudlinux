@@ -46,7 +46,7 @@ It allows you to have full control over all available settings, including disk p
 
 The graphical mode is used by default when you boot the system from the local media.
 
-### Language selection
+#### Language selection
 
 The first screen displayed is the language selection page.
 
@@ -58,7 +58,7 @@ Selected language will be used during installation and also as a default languag
 After you select your language and locale, click `Continue` to confirm your selection 
 and proceed to the [Installation Summary](#installation-summary). 
 
-### Installation summary
+#### Installation summary
 
 The Installation summary screen is the main dashboard of your installation parameters. 
 Most of the options which can be configured during the installation can be accessed from here.
@@ -76,7 +76,7 @@ several different states, which are graphically indicated:
 - Links without warning symbol mean that screen does not require your attention. 
   You can still change your settings in these screens, but it is not required to start installation.
 
-### Installation Source
+#### Installation source
 
 The first thing that you should define is where the system will be installed from.
 There are basically two options:
@@ -243,6 +243,73 @@ Here's what the cldeploy script does when you run it:
 * Checks for efi.
 * Installs CloudLinux Manager for cPanel Solo.
 
-### Next steps
+#### Next steps
 
 Reboot your system, login and check EULA which is located in the `/usr/share/cloudlinux-release/EULA`.
+
+## Uninstalling
+
+You can always uninstall CloudLinux OS Solo. In this case, the system will be converted back to CentOS or
+AlmaLinux.
+
+The following actions will be taken:
+
+* CloudLinux repositories & yum plugin will be removed.
+* CentOS or AlmaLinux repositories will be set up.
+
+In the end, the script will provide instructions on how to finish the conversion back. 
+That will require removal of the CloudLinux kernel (a manual step), and installing CentOS or AlmaLinux kernel (if needed).
+
+:::warning Warning
+Do not forget to free up a CloudLinux OS Solo license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers)
+After that, if you don't intend to use the license anymore, you can [remove it](https://docs.cln.cloudlinux.com/dashboard/#cloudlinux-os-activation-keys) to avoid being billed.
+:::
+
+To uninstall CloudLinux OS, run the following command:
+
+```
+wget -O cldeploy https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
+sh cldeploy -c
+```
+
+Now you have converted back and it is the time to install kernel.
+
+To delete CloudLinux kernel, run the following command (change the kernel package name to the one you've been using):
+
+```
+rpm -e --nodeps kernel-2.6.32-673.26.1.lve1.4.27.el6.x86_64
+```
+
+To install new CentOS or AlmaLinux kernel once you deleted CloudLinux kernel, run the following command:
+
+```
+yum install kernel
+```
+
+If yum says that the latest kernel is already installed, it is OK.
+Please check your bootloader configuration before rebooting the system.
+
+To remove unused kmods and lve libs, run the following command:
+
+```
+yum remove lve kmod*lve*
+```
+
+Before the reboot, the following command should be executed for restoring Apache and httpd.conf without mod_hostinglimits:
+
+*For EasyApache 3:*
+
+```
+/scripts/easyapache --build
+```
+
+*For EasyApache 4:*
+
+```
+/usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/cpanel/default.json
+```
+
+:::tip Note
+Some packages from CloudLinux repo will still remain. They are the same as CentOS or AlmaLinux packages, and don't have to be removed. 
+They will be updated in the future from CentOS repositories, as new versions come out.
+:::
