@@ -76,7 +76,7 @@ several different states, which are graphically indicated:
 - Links without warning symbol mean that screen does not require your attention. 
   You can still change your settings in these screens, but it is not required to start installation.
 
-#### Installation Source
+#### Installation source
 
 The first thing that you should define is where the system will be installed from.
 There are basically two options:
@@ -258,14 +258,14 @@ The following actions will be taken:
 * CentOS or AlmaLinux repositories will be set up.
 
 In the end, the script will provide instructions on how to finish the conversion back. 
-That will require removal of CloudLinux kernel (manual step), and installation of CentOS or AlmaLinux kernel (if needed).
+That will require removal of the CloudLinux kernel (a manual step), and installing CentOS or AlmaLinux kernel (if needed).
 
-:::warning
+:::warning Warning
 Do not forget to free up a CloudLinux OS Solo license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers)
-After that, if you don't intend to use the license anymore, you can [remove it](https://docs.cln.cloudlinux.com/dashboard/#cloudlinux-os-activation-keys) to avoid being billed for it.
+After that, if you don't intend to use the license anymore, you can [remove it](https://docs.cln.cloudlinux.com/dashboard/#cloudlinux-os-activation-keys) to avoid being billed.
 :::
 
-To uninstall CloudLinux OS, run:
+To uninstall CloudLinux OS, run the following command:
 
 ```
 wget -O cldeploy https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
@@ -273,21 +273,24 @@ sh cldeploy -c
 ```
 
 Now you have converted back and it is the time to install kernel.
-To delete CloudLinux kernel, run (change the kernel package name to the one you've been using):
+
+To delete CloudLinux kernel, run the following command (change the kernel package name to the one you've been using):
 
 ```
 rpm -e --nodeps kernel-2.6.32-673.26.1.lve1.4.27.el6.x86_64
 ```
 
-To install new CentOS or AlmaLinux kernel once you deleted CloudLinux kernel, type
+To install new CentOS or AlmaLinux kernel once you deleted CloudLinux kernel, run the following command:
 
 ```
 yum install kernel
 ```
+
 If yum says that the latest kernel is already installed, it is OK.
 Please check your bootloader configuration before rebooting the system.
 
-To remove unused kmods and lve libs run:
+To remove unused kmods and lve libs, run the following command:
+
 ```
 yum remove lve kmod*lve*
 ```
@@ -295,11 +298,13 @@ yum remove lve kmod*lve*
 Before the reboot, the following command should be executed for restoring Apache and httpd.conf without mod_hostinglimits:
 
 *For EasyApache 3:*
+
 ```
 /scripts/easyapache --build
 ```
 
 *For EasyApache 4:*
+
 ```
 /usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/cpanel/default.json
 ```
