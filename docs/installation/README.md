@@ -46,7 +46,7 @@ It allows you to have full control over all available settings, including disk p
 
 The graphical mode is used by default when you boot the system from the local media.
 
-### Language selection
+#### Language selection
 
 The first screen displayed is the language selection page.
 
@@ -58,7 +58,7 @@ Selected language will be used during installation and also as a default languag
 After you select your language and locale, click `Continue` to confirm your selection 
 and proceed to the [Installation Summary](#installation-summary). 
 
-### Installation summary
+#### Installation summary
 
 The Installation summary screen is the main dashboard of your installation parameters. 
 Most of the options which can be configured during the installation can be accessed from here.
@@ -76,7 +76,7 @@ several different states, which are graphically indicated:
 - Links without warning symbol mean that screen does not require your attention. 
   You can still change your settings in these screens, but it is not required to start installation.
 
-### Installation Source
+#### Installation Source
 
 The first thing that you should define is where the system will be installed from.
 There are basically two options:
@@ -243,7 +243,7 @@ Here's what the cldeploy script does when you run it:
 * Checks for efi.
 * Installs CloudLinux Manager for cPanel Solo.
 
-### Next steps
+#### Next steps
 
 Reboot your system, login and check EULA which is located in the `/usr/share/cloudlinux-release/EULA`.
 
