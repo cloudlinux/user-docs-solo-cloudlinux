@@ -31,12 +31,14 @@ Follow the [installation](/installation/) guide and create the minimal working C
 Use activation key to register your instance and get full access to repositories and run the
 `yum update` command to fetch recent changes.
 
-### Provisioning
+### Manage templates
+
+#### Provisioning
 
 We recommend using tools like `ansible` to add packages and tune server configuration.
 You are free to install any control panels, tune settings and configure the default CloudLinux tools.
 
-### Finalize your template
+#### Finalize your template
 
 If you install the control panel in your customized template, 
 please run following commands once installation is done.
@@ -51,7 +53,7 @@ Before you save your customized template, it is required to remove license files
     rm -f /etc/sysconfig/rhn/systemid*
     rm -f /etc/sysconfig/rhn/cl-rollout*
 
-### Updating templates
+#### Updating templates
 
 :::tip
 We strongly recommend recreating templates at least once a month to keep images
@@ -65,6 +67,6 @@ There are two ways of templates update:
    Don't forget to remove license keys from the template as described 
    in [Finalize your template](./#finalize-your-template).
 
-### Next steps
+#### Next steps
 
 Save the modified environment as the template and publish it for your clients.

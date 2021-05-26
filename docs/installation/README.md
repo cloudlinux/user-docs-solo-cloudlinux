@@ -215,7 +215,7 @@ reboot
 The script automatically detects and supports the following control panels:
 * cPanel with Easy Apache 4
 
-Unfortunately, for now is is not possible to convert servers with:
+Unfortunately, for now it is not possible to convert servers with:
 
 * Plesk
 * DirectAdmin
