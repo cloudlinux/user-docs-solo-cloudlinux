@@ -84,4 +84,4 @@ Currently, the following version are supported:
 ## What's next
 
 1. The [Installation](/installation) section contains information about how to install this OS.
-2. The [CLN](/cln) section contains the instructions about how to buy license or get trial.
+2. The [landing page](https://lp.cloudlinux.com/cloudlinux-os-solo) contains the instructions about how to buy license or get trial.
