@@ -31,8 +31,6 @@ There are multiple ISO types available:
   so you can set up any possible configuration without network access.
 * `CloudLinux-*-minimal.iso` - this one contains only minimal set of packages to set up light server without GUI and Development tools.
 
-[https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/) - network/DVD installation ISOs
-
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) 
 and then run the `yum update` command to get all recent updates.
