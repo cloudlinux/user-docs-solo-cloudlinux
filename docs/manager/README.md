@@ -4,13 +4,22 @@
 
 <span class="notranslate">CloudLinux Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor all CloudLinux OS Solo features.
 
+CloudLinux Manager (previously LVE Manager) is accessible via the *Server Configuration* tab:
+
+![](/images/howtofindlvemanagerinpanel.png)
+
+
+:::warning Warning
+LVE Manager is renamed to CloudLinux Manager since cPanel v 96.0.9
+:::
+
+
 ![](/images/solo_lvemanagermainmenu.png)
 
 Log in as administrator to get access to the following functionality:
 
 * <span class="notranslate">Website Monitoring</span> provides access to Website Monitoring and PHP Slow Site Analyzer.
 * <span class="notranslate">X-Ray</span> tab - provides access to X-Ray;
-
 
 ## Activation
 

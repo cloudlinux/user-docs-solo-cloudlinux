@@ -14,7 +14,7 @@ Use it to [activate your system](./#license-activation)
 or to [convert server to CloudLinux](/installation/#converting-existing-servers) server.
 
 :::tip Note
-Activation gives you access to the CloudLinux Manager features and system updates. 
+Activation gives you access to the [CloudLinux Manager](/manager/#cloudLinux_manager) features and system updates. 
 :::
 
 ## License activation
