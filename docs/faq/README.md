@@ -45,7 +45,9 @@ You can convert CentOS/AlmaLinux/RockyLinux OS to CloudLinux OS Solo. Please ref
 
 The Website Monitoring tool is intended for monitoring the domain main page generation time and errors occurring when requesting the main page (the main tab).
 
-The administrator can get the list of the slowest requests during 24 hours (the PHP Slow Site analyzer tab) and receive the daily reports with the list of the slow requests and instant emails if the domain main page is unavailable.
+* The administrator can get the list of the slowest requests during 24 hours (the PHP Slow Site analyzer tab).
+* The administrator can receive the daily reports with the list of the slow requests.
+* The administrator receives instant emails if the domain main page is unavailable.
 
 You can read more about the Website Monitoring tool [here](/manager/#website-monitoring-tool).
 
@@ -61,7 +63,7 @@ You can read more about the X-Ray tool [here](/manager/#x-ray).
 
 Yes, they will.
 
-### Why are the emails from the Website Monitoring tool not coming?
+### Why I don't receive emails from the Website Monitoring tool?
 
 Please verify your cPanel firewall settings.
 
