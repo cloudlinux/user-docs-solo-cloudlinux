@@ -51,7 +51,7 @@ You can read more about the Website Monitoring tool [here](/manager/#website-mon
 
 ### What is the X-Ray tool intended for?
 
-The X-ray tool is intended for deep analysis of slow request cause. The X-ray tool can provide information about software modules and plugins execution time, database queries and system functions execution time.
+The X-ray tool is intended for deep analysis of slow request cause. The X-ray tool can provide information about software modules and plugins execution time, database queries, system functions and external requests execution time.
 
 It can be used by the administrator and by the user.
 
