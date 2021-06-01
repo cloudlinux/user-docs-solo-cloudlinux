@@ -39,7 +39,7 @@ Please feel free to ask your questions [here](https://cloudlinux.zendesk.com/hc/
 
 ### Can I convert to CloudLinux OS Solo from another OS?
 
-You can convert CentOS/AlmaLinux/RockyLinux OS to CloudLinux OS Solo. Please refer to [this instruction](/installation/#converting-existing-servers).
+You can convert CentOS/AlmaLinux OS to CloudLinux OS Solo. Please refer to [this instruction](/installation/#converting-existing-servers).
 
 ### What is the Website Monitoring tool intended for?
 
