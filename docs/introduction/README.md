@@ -13,9 +13,8 @@ We provide the CloudLinux OS Solo with pre-installed features, but for grafical 
 
 #### Supported control panels
 
-| | |
+|**Panel**|**Supported**|
 |-|-|
-|Panel|Supported|
 |cPanel Solo|Yes|
 |cPanel regular with one user|Yes|
 |Plesk|No|
