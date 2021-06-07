@@ -17,8 +17,8 @@ We provide the CloudLinux OS Solo with pre-installed features, but for grafical 
 |:-:|:-:|
 |cPanel Solo|Yes|
 |cPanel regular with one user|Yes|
-|Plesk|No|
-|DirectAdmin|No|
+|Plesk|No (coming soon)|
+|DirectAdmin|No (coming soon)|
 |Other panels|No|
 |No control panel|No|
 
