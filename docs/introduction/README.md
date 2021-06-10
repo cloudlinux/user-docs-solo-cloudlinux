@@ -11,6 +11,11 @@ Unlike [CloudLinux OS Shared](https://docs.cloudlinux.com/introduction/), this e
 
 We provide the CloudLinux OS Solo with pre-installed features, but for grafical interface, please install a control panel on your server.
 
+:::warning
+Currently supported OS version is CloudLinux OS Solo 8 only. Therefore, for now, there is no possibility to use CloudLinux OS Solo on servers with OS version 6 and 7.
+Please refer to the [currently supported OS versions](/introduction/#cloudlinux-os-solo-lifecycle).
+:::
+
 #### Supported control panels
 
 |**Panel**|**Supported**|

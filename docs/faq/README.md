@@ -70,3 +70,12 @@ Please verify your cPanel firewall settings.
 ### Can I use other CloudLinux products (Imunify360, KernelCare) with CloudLinux OS Solo?
 
 Yes, it is possible.
+
+### Can I register my CloudLinux OS Shared 6/7 with CloudLinux OS Solo trial key?
+
+No, this is not a workable scenario.
+
+### Can I convert CentOS 6,7 to CloudLinux OS Solo 8 using the cldeploy script?
+
+No, you cannot. Only CentOS 8/AlmaLinux 8 can be converted.
+
