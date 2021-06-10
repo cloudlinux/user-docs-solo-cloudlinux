@@ -71,9 +71,9 @@ Please verify your cPanel firewall settings.
 
 Yes, it is possible.
 
-### Can I register my CloudLinux OS Shared 6/7 with CloudLinux OS Solo trial key?
+### Can I register my CloudLinux OS Shared 6/7/8 with CloudLinux OS Solo trial key?
 
-No, this is not a workable scenario.
+No, you cannot.
 
 ### Can I convert CentOS 6,7 to CloudLinux OS Solo 8 using the cldeploy script?
 
