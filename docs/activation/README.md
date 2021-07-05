@@ -24,9 +24,18 @@ Activation gives you access to the [CloudLinux Manager](/manager/#cloudLinux_man
 
 ## License activation
 
-To register your server with CloudLinux Network using the activation key, run the following commands:
+There are several ways to register your server with CloudLinux Network:
+
+using the activation key by following commands:
 
 ```
 yum install rhn-setup --enablerepo=cloudlinux-base
 /usr/sbin/rhnreg_ks --activationkey=<activation key>
+```
+
+using IP-based licensing:
+
+```
+yum install rhn-setup --enablerepo=cloudlinux-base
+/usr/sbin/clnreg_ks --edition=solo
 ```
