@@ -37,5 +37,5 @@ using IP-based licensing:
 
 ```
 yum install rhn-setup --enablerepo=cloudlinux-base
-/usr/sbin/clnreg_ks --edition=solo
+/usr/sbin/clnreg_ks
 ```
