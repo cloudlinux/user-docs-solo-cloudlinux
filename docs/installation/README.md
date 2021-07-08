@@ -22,7 +22,7 @@ You can [check the entire list here](https://access.redhat.com/documentation/en-
 ### Downloading installation media
 
 You can download the latest ISO and use it to install 
-CloudLinux OS Solo on your server using [this link](https://repo.cloudlinux.com/cloudlinux/8.3_solo_beta-netinstall/iso/x86_64/).
+CloudLinux OS Solo on your server using [this link](https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/).
 
 There are multiple ISO types available:
 
@@ -97,7 +97,7 @@ so you can see the URL configuration field greyed out, like on the screenshot be
 The correct installation URL for CloudLinux OS Solo is
 
 ```text
-https://repo.cloudlinux.com/cloudlinux/8.3_solo_beta-netinstall/BaseOS/x86_64/kickstart/
+https://repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/kickstart/
 ```
 
 Type in installation URL in the corresponding field, configure proxy if needed and press the `Done` button.
