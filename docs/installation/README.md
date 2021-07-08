@@ -207,6 +207,13 @@ bash cldeploy -k ACTIVATION_KEY
 
 Where `ACTIVATION_KEY` is the one that you got on previous step.
 
+If you want to get IP-based license, run the following commands:
+
+```
+yum install wget -y
+wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
+bash cldeploy -i --to-solo-edition
+```
 
 After successful conversion, reboot your system by running the following command:
 
