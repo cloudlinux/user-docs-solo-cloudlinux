@@ -79,3 +79,6 @@ No, you cannot.
 
 No, you cannot. Only CentOS 8/AlmaLinux 8 can be converted.
 
+### Does CloudLinux OS Solo work with LiteSpeed?
+
+No, it does not. We are still implementing this feature, so it will be available in the next CloudLinux OS Solo releases.
