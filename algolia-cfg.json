@@ -1,7 +1,7 @@
 {
-  "index_name": "cloudlinuxos",
+  "index_name": "cloudlinuxos-single",
   "start_urls": [
-    "http://docs.cloudlinux.com"
+    "https://docs.solo.cloudlinux.com"
   ],
   "stop_urls": [
     "/#",
