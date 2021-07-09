@@ -59,7 +59,7 @@ It can be used by the administrator and by the user.
 
 You can read more about the X-Ray tool [here](/manager/#x-ray).
 
-### Will the monitoring tools work with the LiteSpeed and Nginx web servers?
+### Will the Website Monitoring Tool (WMT) work with the LiteSpeed and Nginx web servers?
 
 Yes, they will.
 
