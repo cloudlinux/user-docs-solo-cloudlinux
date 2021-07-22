@@ -82,3 +82,11 @@ No, you cannot. Only CentOS 8/AlmaLinux 8 can be converted.
 ### Does CloudLinux OS Solo work with LiteSpeed?
 
 No, it does not. We are still implementing this feature, so it will be available in the next CloudLinux OS Solo releases.
+
+### What is the process of upgrading if the customer adds more users to the server and will have to upgrade? (i.e., upgrading from CloudLinux OS Solo to CloudLinux OS Shared)
+
+Create a new server by [converting an existing server](/installation/#converting-existing-servers) or [from ISO](/installation/#iso-file-source)) and migrate the settings of that one user.
+
+:::tip
+We are collecting feedback about CloudLinux OS Solo to CloudLinux OS Shared transitions and may consider implementing that automatically in the future.
+:::
