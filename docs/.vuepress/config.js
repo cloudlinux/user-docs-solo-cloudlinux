@@ -12,7 +12,7 @@ const slugifyLinks = (s) => {
 // set your global autometa options
 const autoMetaOptions = {
   site: {
-    name   : 'Cloudlinux OS Solo Documentation',
+    name   : 'CloudLinux OS Solo Documentation',
     // twitter: 'cl_docs',
   },
   canonical_base: 'https://docs.solo.cloudlinux.com/',
@@ -98,7 +98,7 @@ module.exports = {
     docsDir: "docs",
     
     translationSource: 'docs.solo.cloudlinux.com',
-    defaultURL: "/introduction/",
+    defaultURL: "/wpos-plugin/",
     redirectionMapping: urls,
     sidebarDepth: 2,
     logo: "/logo.svg",
@@ -162,12 +162,7 @@ module.exports = {
             title: "Content",
             collapsable: false,
             children: [
-              "/introduction/",
-              "/installation/",
-              "/activation/",
-              "/administration/",
-              "/manager/",
-              "/faq/",
+              "/wpos-plugin/",
             ]
           }
         ]
