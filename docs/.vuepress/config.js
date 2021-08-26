@@ -12,10 +12,10 @@ const slugifyLinks = (s) => {
 // set your global autometa options
 const autoMetaOptions = {
   site: {
-    name   : 'CloudLinux OS Solo Documentation',
+    name   : 'CloudLinux OS Solo End-User Documentation',
     // twitter: 'cl_docs',
   },
-  canonical_base: 'https://docs.solo.cloudlinux.com/',
+  canonical_base: 'https://user-docs.solo.cloudlinux.com/',
 };
 
 module.exports = {
@@ -75,7 +75,7 @@ module.exports = {
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
-      description: "CloudLinux OS Solo Documentation"
+      description: "CloudLinux OS Solo Documentation For End-Users"
     },
 //    "/ru/": {
 //      lang: "ru",
@@ -98,7 +98,7 @@ module.exports = {
     docsDir: "docs",
     
     translationSource: 'docs.solo.cloudlinux.com',
-    defaultURL: "/wpos-plugin/",
+    defaultURL: "/introduction/",
     redirectionMapping: urls,
     sidebarDepth: 2,
     logo: "/logo.svg",
@@ -143,7 +143,7 @@ module.exports = {
         // text for the edit-on-github link
         editLinkText: "Edit this page",
         tryFree: "Try Free",
-        search: "Search",
+        //search: "Search",
         // config for Service Worker
         serviceWorker: {
           updatePopup: {
@@ -153,7 +153,7 @@ module.exports = {
         },
         algolia: {
           apiKey: "73e0cad45f7181832f47f4aeccfeeaa2",
-          indexName: "cloudlinuxos-single",
+          indexName: "cloudlinuxos-solo-users",
           appId: "0TCNL6CGX8"
         },
 
@@ -162,6 +162,7 @@ module.exports = {
             title: "Content",
             collapsable: false,
             children: [
+              "/introduction/",
               "/wpos-plugin/",
             ]
           }
