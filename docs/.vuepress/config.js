@@ -164,6 +164,7 @@ module.exports = {
             children: [
               "/introduction/",
               "/wpos-plugin/",
+              "/end-user-x-ray-plugin/",
             ]
           }
         ]
