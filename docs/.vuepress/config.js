@@ -141,7 +141,8 @@ e.parentNode.insertBefore(s, e);
             text: "Contact support",
             url: "https://hubs.ly/H0pk7990"
           },
-          { text: "Blog", url: "https://www.cloudlinux.com/blog" }
+          { text: "Blog", url: "https://www.cloudlinux.com/blog" },
+          { text: "CloudLinux OS Shared Documentation", url: "https://docs.cloudlinux.com/" }
         ],
 
         // text for the language dropdown title
