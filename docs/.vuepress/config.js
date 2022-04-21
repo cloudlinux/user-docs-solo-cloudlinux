@@ -12,10 +12,10 @@ const slugifyLinks = (s) => {
 // set your global autometa options
 const autoMetaOptions = {
   site: {
-    name   : 'Cloudlinux OS Documentation',
+    name   : 'CloudLinux OS Solo End-User Documentation',
     // twitter: 'cl_docs',
   },
-  canonical_base: 'https://docs.cloudlinux.com/',
+  canonical_base: 'https://user-docs.solo.cloudlinux.com/',
 };
 
 module.exports = {
@@ -35,14 +35,15 @@ module.exports = {
       before: info => `<div class="danger custom-block"><p class="custom-block-title">${info}</p>`,
       after: '</div>',
     }],
-    ['disqus-spa', { shortname: 'docscloudlinuxcom' }],
+//    ['disqus-spa', { shortname: 'docscloudlinuxcom' }],
     ['@vuepress/google-analytics',
       {
         'ga': 'UA-12711721-15'
       }
     ],
-    [ 'autometa', autoMetaOptions ],
-    [ 'separate-pages', { alwaysVisibleBlocks: ['#disqus_thread'] } ]
+    [ 'autometa', autoMetaOptions ]
+//	,
+//    [ 'separate-pages', { alwaysVisibleBlocks: ['#disqus_thread'] } ]
   ],
   configureWebpack: {
     resolve: {
@@ -67,17 +68,6 @@ module.exports = {
         href: "/favicon.ico"
       }
     ],
-    [
-      "script",
-      {},
-      `(function(w) {
-var s = document.createElement('script');
-s.src = 'https://survey.survicate.com/workspaces/8e05b856a98802352b97e8fd3118de1f/web_surveys.js';
-s.async = true;
-var e = document.getElementsByTagName('script')[0];
-e.parentNode.insertBefore(s, e);
-})(window);`
-    ]
   ],
   locales: {
     // The key is the path for the locale to be nested under.
@@ -85,13 +75,13 @@ e.parentNode.insertBefore(s, e);
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
-      description: "CloudLinux Documentation"
+      description: "CloudLinux OS Solo Documentation For End-Users"
     },
-    "/ru/": {
-      lang: "ru",
-      title: "Документация",
-      description: "Документация CloudLinux"
-    }
+//    "/ru/": {
+//      lang: "ru",
+//      title: "Документация",
+//      description: "Документация CloudLinux"
+//    }
   },
   theme: "cloudlinux",
   markdown: {
@@ -102,12 +92,12 @@ e.parentNode.insertBefore(s, e);
   },
 
   themeConfig: {
-    repo: "cloudlinux/cloudlinux-doc",
+    repo: "cloudlinux/cloudlinux-single-doc",
     editLinks: true,
     docsBranch: "dev",
     docsDir: "docs",
-    
-    translationSource: 'docs.cloudlinux.com',
+
+    translationSource: 'docs.solo.cloudlinux.com',
     defaultURL: "/introduction/",
     redirectionMapping: urls,
     sidebarDepth: 2,
@@ -131,7 +121,7 @@ e.parentNode.insertBefore(s, e);
           {
             text: "How to",
             url:
-              "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I"
+              "https://cloudlinux.zendesk.com/hc/en-us/categories/360002375940"
           },
           {
             text: "Getting started",
@@ -139,10 +129,9 @@ e.parentNode.insertBefore(s, e);
           },
           {
             text: "Contact support",
-            url: "https://hubs.ly/H0pk7990"
+            url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
           },
-          { text: "Blog", url: "https://www.cloudlinux.com/blog" },
-          { text: "CloudLinux OS Shared Documentation", url: "https://docs.cloudlinux.com/" }
+          { text: "Blog", url: "https://blog.cloudlinux.com/" }
         ],
 
         // text for the language dropdown title
@@ -154,7 +143,7 @@ e.parentNode.insertBefore(s, e);
         // text for the edit-on-github link
         editLinkText: "Edit this page",
         tryFree: "Try Free",
-        search: "Search",
+        //search: "Search",
         // config for Service Worker
         serviceWorker: {
           updatePopup: {
@@ -163,8 +152,8 @@ e.parentNode.insertBefore(s, e);
           }
         },
         algolia: {
-          apiKey: "3990019335416f9a96a6a47d07e25187",
-          indexName: "cloudlinuxos",
+          apiKey: "73e0cad45f7181832f47f4aeccfeeaa2",
+          indexName: "cloudlinuxos-solo-users",
           appId: "0TCNL6CGX8"
         },
 
@@ -174,74 +163,21 @@ e.parentNode.insertBefore(s, e);
             collapsable: false,
             children: [
               "/introduction/",
-              "/cloudlinux_installation/",
-              "/control_panel_integration/",
-              "/limits/",
-              "/command-line_tools/",
-              "/lve_manager/",
-              "/x-ray/",
-              "/cloudlinux_os_components/",
-              "/cloudlinux_os_kernel/",
-              "/for_cloudlinux_partners/",
-              "/deprecated/"
+              "/wpos-plugin/",
+              "/end-user-x-ray-plugin/",
             ]
           }
         ]
       },
-      "/ru/": {
-        title: "Язык",
-        selectText: "Рус",
-        label: "Русский",
-        editLinkText: "Редактировать",
-        tryFree: "Попробовать бесплатно",
-        search: "Поиск",
-        serviceWorker: {
-          updatePopup: {
-            message: "Доступен новый контент",
-            buttonText: "Обновить"
-          }
-        },
-        algolia: {
-          apiKey: "3990019335416f9a96a6a47d07e25187",
-          indexName: "cloudlinuxos-ru",
-          appId: "0TCNL6CGX8"
-        },
-        stayInTouch: "Будем на связи",
-        bottomLinks: [
-            {
-                text: "Инструкции",
-                url: "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I"
-            },
-            {
-                text: "С чего начать",
-                url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
-            },
-            {
-                text: "Техподдержка",
-                url: "https://hubs.ly/H0pk7990"
-            },
-            { text: "Блог", url: "https://www.cloudlinux.com/blog" }
-        ],
-        sidebar: [
-          {
-            title: "Содержание",
-            collapsable: false,
-            children: [
-              "/ru/introduction/",
-              "/ru/cloudlinux_installation/",
-              "/ru/control_panel_integration/",
-              "/ru/limits/",
-              "/ru/command-line_tools/",
-              "/ru/lve_manager/",
-              "/ru/x-ray/",
-              "/ru/cloudlinux_os_components/",
-              "/ru/cloudlinux_os_kernel/",
-              "/ru/for_cloudlinux_partners/",
-              "/ru/deprecated/"
-            ]
-          }
-        ]
-      }
+    }
+  },
+  chainWebpack: (config, isServer) => {
+    config.module.rule('vue').uses.store.get('vue-loader').store.get('options').transformAssetUrls = {
+      video: ['src', 'poster'],
+      source: 'src',
+      img: 'src',
+      image: ['xlink:href', 'href'],
+      a: 'href'
     }
   }
 };
