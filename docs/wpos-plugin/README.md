@@ -1,201 +1,389 @@
-# AccelerateWP & Smart Advice
+# AccelerateWP
 
-AccelerateWP is an improved and updated WP Optimization Suite.
+## Overview
 
-## Introduction
+AccelerateWP is a complex solution to help our customers increase their WordPress site performance. With AccelerateWP you can manage optimization features, like object caching, css and js preprocessing and website preloading.
 
-Performance has a great impact on the site attendance and efficiency. We know that many customers want an auto tool to resolve problems with site performance. Many sites are built with WordPress CMS. So, we decided to find and implement a complex solution – the AccelerateWP tool to help our customers increase their site performance.
+In order to start using AccelerateWP, go to the cPanel interface and find the `AccelerateWP` application in the `Software` section.
 
-There are two modules in the AccelerateWP: Object Cache Module and Site Optimization Module.
+![](/images/AWPApp.png)
 
-The **Smart Advice** tool helps to decide which module will be most effective and helpful for particular website performance optimization.
+Click the application button and get into the AccelerateWP interface.
+
+![](/images/AWPUserUI.png)
+
+Each row in the table is the WordPress website that was found on server and each column is the optimization feature.
+
+AccelerateWP is fully advice-driven: the feature could be enabled once the Smart Advice is issued. Smart advice may be issued during profiling a website with X-Ray. X-Ray PHP profiler detects concrete bottlenecks in website performance and thus is able to select a best suited optimization feature to increase it significantly.
+
+Use the `Advice available` link to check advice details and click the `Apply advice` button to activate the feature.
+
+![](/images/AdviceReview.png)
+
+After a couple of minutes, the feature will be activated and advice becomes `Applied`.
+Close the window and see `Active` link in the corresponding cell of the table.
+
+![](/images/AdviceApplied.png)
 
 
-### Object caching explanation
+## AccelerateWP feature: WordPress optimization plugin
+AccelerateWP is a base feature that provides full page caching, GZIP compression and some other useful optimizations.
 
-Caching is a mechanism of accessing frequently used data quickly. This mechanism is really helpful in case your site needs to process multiple pages per second as requests come in. If data is stored in cache the server does not need to process it time after time because such data can be obtained from the cache. So, visitors get it faster – it is really fantastic!
+In order to start working with AccelerateWP feature, check if advice is available in the corresponding cell on the intersection of website and Accelerate WP column.
 
-And one more interesting thing is that there are different types of caching.
+![](/images/AWPUserUI.png)
 
-* One type of caching is already used by your browser (client-side).
-* And another type of caching (one of server-side) is used to store database queries data and is called the Object cache.
+And click the "Apply advice" button to activate the AccelerateWP feature.
 
-The speed of processing queries to the database is very important for WordPress CMS, because all content data is stored in the WordPress database. So, if you activate (turn on) the Object cache module it means that you activate some storage to cache queries from your clients to the WordPress database. Every time users of your site request some content for the web page it makes a request to the WordPress database.
+![](/images/AdviceReview.png)
 
-### Our solution for the Object cache module
+After a couple of minutes, the plugin will be installed.
+Login into the WordPress Admin and find the AccelerateWP in the list of active plugins.
 
-The solution is based on the Redis Object cache [https://wordpress.org/plugins/redis-cache/](https://wordpress.org/plugins/redis-cache/) and automatically sets up the Redis key-value storage and configures it appropriately.
+![](/images/WPPlugins.png)
 
-The storage is located in the RAM of the server which stores data from the WordPress database queries. It caches objects between multiple page loads. But restarting the Object cache module daemon (very rare situation) will erase the data in the storage, and some period of time is needed to collect the data again.
+Page caching will be enabled by default. Click "Settings" link below the plugin name to configure additional options.
 
-When we recommend to use Object cache module:
+![](/images/AWPPlugin.png)
 
+
+### Limitations
+* Website must use php version 7.0 or higher.
+* WordPress version must be 5.4 and higher.
+* Other WordPress Caching plugins must not be installed.
+* WordPress should not run in Multisite mode.
+
+
+## AccelerateWP feature additional options
+Find more additional options in WordPress admin page.
+
+### Mobile caching
+Use it only if you website is adapted to use on smartphones and mobile phones.
+
+Separate cache files for mobile devices. In this case the content for mobile devices will be cached into different cache file as for desktop\tablets.
+
+This option is necessary if you have some functionality only for mobile devices, not for desktop\tablets.
+
+We prepared the diagram to help you understand if you need mobile caching.
+
+![](/images/MobileDiag.png)
+
+:::tip Note
+If you use an additional layer of Cache (Varnish, NGINX , etc.) make sure it can distinguish between desktop and mobile visitors.
+:::
+
+
+### User Cache
+It is recommended to use such an option when your website has a unique content for each logged-in user. If the user is not logged-in, a common site cache will be used, otherwise each logged-in user’s content will be cached separately.
+
+
+### File Optimization
+File Optimization consists of Minification and file Combining.
+
+Minification is the process of minimizing code in your web pages and script files. Webmasters look at minification as a primary method of reducing website load times via the bandwidth they use.
+
+Minification also reduces JS, CSS and HTML files. The goal is removing comments and extra spaces. It crunches variables that minimize code and ultimately reduces the file size.
+
+After minification, the file still functions as it should. The difference is a reduction in bandwidth due to network requests.
+
+**By combining CSS & JS files, HTTP/1 does not allow multiple requests from the same TCP connection between a host server and a web browser.**
+
+Putting CSS and JS files into their respective groups, makes requests for downloads from a browser safe and more efficient. The old way meant multiple connections that took up bandwidth.
+
+**File (CSS & JS) combining is not necessary for HTTP/2 (see https://webspeedtools.com/should-i-combine-css-js/)**
+
+HTTP/2 introduced multiplexing. Now, the browser can send unlimited number of requests to the server, then download all files simultaneously with only one TCP connection.
+
+Consequently, HTTP/2 takes care of multiple TCP connections and the waiting times before each download. In one sense, consolidating CSS and JS files might be unnecessary.
+
+To verify which HTTP version is used for requests on your site, you can use https://tools.keycdn.com/http2-test
+
+
+### CSS Files
+**Minify CSS**
+
+Minify CSS reduces file sizes by taking out white space and comments embedded in the code.
+
+**Combine CSS**
+
+Combine CSS reduces HTTP requests by merging all your files into one. Combine CSS is not recommended if your site uses HTTP/2.
+
+**Excluded CSS Files**
+
+To single out those CSS files that should not be minimized, list the URLs attached to the CSS files that should be excluded from minification and concatenation (one per line).
+
+:::warning Caution!
+Minification removes the domain from the URL.
+:::
+
+To prevent that, use (. *).CSS wildcards to exclude all files in a specific location.
+
+3rd Party: when excluding external CSS files, use the domain or the full URL path.
+
+
+### JavaScript Files
+**Minify javascript files**
+
+Minify JavaScript removes whitespace and comments to reduce the file size.
+
+**Combine JavaScripts files**
+
+This option will be active only if you choose Minify javascript files. It is not recommended for HTTP2.
+
+**Load JavaScript deferred**
+
+One major cause of slow web pages is a so-called blocking script https://www.dummies.com/web-design-development/javascript/deferred-loading-with-javascript/
+
+Loading JavaScript called a blocking script blocks the webpage from loading.
+
+Using the `defer` attribute alerts the browser not to wait for the script. Things will continue as usual per the build HTML and DOM processes. Quietly, the script rests in the background, then runs once the DOM is built.
+
+So, the `Load JavaScript deferred` option adds to each script tag the `defer` attribute.
+
+**Delay JavaScript Execution**
+
+This option helps to decrease the page load time by delaying loading of all JavaScripts on the page. This option can be applied only for already cached pages, it is incompatible with the Combine JavaScripts files option.
+
+
+### Media
+**LazyLoad**
+
+LazyLoad affects the page in the next way - if the user opens the page for the first loading there will be only first displayed (visible to user) images, others will be loaded if the user scrolls down. Images added via CSS file, the `<style>` tag or via `Elementor` will not be affected by the LazyLoad.
+
+The following options allows working with LazyLoad
+* Enable LazyLoad for images
+* Enable LazyLoad for iframes and videos
+* Excluded images or iframes
+
+
+### Image Dimensions
+Add Missing Image Dimensions
+
+Correct image dimensions help the browser to recognize page structure without delays, because the browser knows how much space is needed for the image.
+
+Cases when image will not be affected by the *Add Missing Image Dimensions*:
+
+* Images which have any attribute with name containing `*height*` or `*width*`
+* Images which are part of the `<picture>` tag
+* SVG images
+* Image from external domains
+
+
+### Preload
+**Preload Cache**
+
+Usually, a page cache is created when this page is first visited. You can activate the preload page cache. It means that the cache for the page will be created when the page is created or updated.
+
+If sitemap-based cache preloading is activated, a specified sitemap file will be used for preliminary cache generation.
+
+**Preload Links**
+
+Provides functionality to preload the HTML content of the hovered link for acceleration loading pages after click.
+
+**Prefetch DNS Requests**
+
+If your website uses external resources (e.g. Google fonts, Youtube video, etc) AccelerateWP can preload these resources for accelerating loading pages. To activate preloading external URLs, provide a list of external URLs.
+
+**Preload Fonts**
+
+Accelerates the loading of fonts by the browser, informing the browser at the very beginning of the request about the full list of fonts to download
+
+
+### Advanced Rules
+Advanced site caching settings. If you have specific pages that must be processed individually you can add a custom rule for them.
+
+**Never Cache URL(s)**
+
+Provide a list of URLs that cannot be cached.
+
+**Never Cache Cookies**
+
+Provide a list of Cookie files that cannot be cached.
+
+**Never Cache User Agent(s)**
+
+Provide a list of User Agent names that cannot be cached.
+
+**Always Purge URL(s)**
+
+You can specify URLs that will be deleted from the cache when any post or page will be updated.
+
+**Cache Query String(s)**
+
+By default AccelerateWP does not cache URLs with query strings, but in this option, you can specify GET-parameters that must be cached.
+
+
+### Database
+Database optimization provides clearing database from expired and unused data.
+
+**Post Cleanup**
+
+Provides clearing posts revisions, autosaved drafts, and deleted posts from the trash. Be careful, you will not be able to restore this data after clearing it.
+
+**Comments Cleanup**
+
+Provides clearing spam and deleted comments from the trash. Be careful, you will not be able to restore this data after clearing it.
+
+**Transients Cleanup**
+
+Provides clearing temporary options for existing plugins and older unused options that keep after deleting plugins.
+
+**Database Cleanup**
+
+Provides table optimizations in your database server.
+
+**Automatic cleanup**
+
+Allows you to schedule periodic database cleanups.
+
+
+### Heartbeat
+WordPress Heartbeat is a function of server polling that provides delivery data from server to browser periodically.
+
+**Reduce or disable Heartbeat activity**
+
+To control server loads you can activate the *Control Heartbeat* function and reduce or disable Heartbeat activity. You can manage Heartbeat activity separately for backend, frontend, and post-editing parts. Be careful, disabling Heartbeat can break plugins that use this functionality.
+
+
+### One-click AccelerateWP Add-ons
+**Varnish**
+
+When the server uses Varnish, you need to activate the add-on for implementing clearing Varnish cache when AccelerateWP clears site cache.
+
+**WebP Compatibility**
+
+If your site uses the WebP plugin you can activate AccelerateWP WebP Compatibility add-on to achieve browser compatibility with your WebP images.
+
+
+### CloudFlare
+If your site is connected to the Cloudflare CDN you can activate the Cloudflare add-on to manage Cloudflare options with AccelerateWP and automatic clearing cache when AccelerateWP clears site cache. After activating the add-on, you need to click the *Modify Options* button and specify the Cloudflare API key, Account E-mail and Zone ID.
+
+
+### CDN
+CDN stands for Content Delivery Network, the feature that simplifies and speeds up resources loading for your customers.
+
+In order to start using CDN, you need:
+1. Public website on the Internet with a valid domain name
+2. Pull a CDN zone, for example, https://bunny.net/
+
+To set up a CDN in the AccelerateWP you must register CDN zone and get pull zone configuration.
+
+After setting up the Pull zone, you will receive an address, for example: domain.b-cdn.net
+
+![](/images/CDNGeneral.png)
+
+Go to the WP Admin of your WordPress site, open the settings of the AccelerateWP (Step 1) and select the CDN section (Step 2).  Select the option: Enable Content Delivery Network (Step 3) and fill in the "CDN CNAME(s)" field with the previously received domain.b-cdn.net address (Step 4).
+
+![](/images/CDNFlow.png)
+
+Click the "Save changes" button (Step 5).
+
+In order to check CDN is working, open website in incognito mode with Developer Tools open in your browser. Go to the "Network" tab, find the "Domain" column, you should see the specified address in the CDN settings of the AccelerateWP plugin for your js/css/image files.
+
+
+### Tools
+For backing up the settings, there is a function for exporting settings. To use it, click the *Download settings* button. When you need to restore settings, choose your saved settings file and click the *Upload file and import settings* button.
+
+
+## AccelerateWP Premium: Object caching feature
+
+**Object caching is a premium feature which is currently in beta and available only for some hosters.**
+
+Unlike full page caching, this mechanism is not saving the whole page in cache, but stores database query results in additional storage for quick access. This mechanism is really helpful in case your site needs to process multiple pages per second as requests come in and may be helpful in case when full page caching cannot be used, e.g. on personalized pages.
+
+When we recommend to use Object caching feature:
 * Websites used for extremely active exchange of information (forums, blogs, etc..)
 * Websites with too many requests running at the same time
 * Websites having important pages that cannot be cached entirely and exclude from the "whole page caching" due to any reason
 
+In order to start working with Object caching feature, check if advice is available in the corresponding cell on the intersection of website and AccelerateWP Premium column.
 
-#### How can we monitor the state of the Object cache module?
+![](/images/AWPPremiumUI.png)
 
-* Status of the storage (or Object cache database)
-* Cache memory usage (or memory usage by the Object cache module)
-* Max Memory usage limit (or limit for memory using by the Object cache module)
+And click the "Apply advice" button to activate the Object caching feature.
 
+![](/images/AWPPremiumReview.png)
 
-### Object Cache Module Limitations
+After couple of minutes, the redis instance will be configured, plugin will be installed and activated.
 
-For the first beta release, there are the following limitations:
+![](/images/AWPPremiumApplied.png)
 
-* Required ea-PHP version 7.4 and 8.0.
-* Recommended WordPress version 3.7 and higher.
-* Object Cache module conflicts with other WordPress Caching plugins.
-* Object Cache module conflicts with the [Snuffleupagus](https://snuffleupagus.readthedocs.io/) php-extension.
-* Object Cache module does not work with WordPress Multisite mode.
+Close the window and see "Active" link in the corresponding cell of the table.
 
-### Site Optimization Module
+Object caching does not require any additional configuration.
 
-Coming soon...
-
-### Smart Advice
-
-How does Smart Advice make a decision which module needs to be activated?
-
-Smart Advice has information about types of slow requests for the site for the appropriate period of time and creates new advice based on it. Advices are generated automatically so no additional configuration is needed.
-
-
-## AccelerateWP User Interface
-
-1. Go to the list of software on your control panel and find the AccelerateWP icon:
-
-![](/images/WPOptimizationSuiteIcon.png)
-
-2. Open plugin interface
-
-![](/images/WPPluginInterface.png)
-
-3. You can turn on the Object Cache module or the Site Optimization module by yourself or via the Smart Advice suggestion.
-
-### AccelerateWP information panel
-
-On the AccelerateWP information panel you can find the following statuses.
-
-* **Object Cache module Database status**
-
-It will be offline if there is no sites using the Object Cache plugin.
-
-![](/images/ObjectCacheModuleDatabaseStatus.png)
-
-* **Amount of memory used by the Object Cache database**
-  
-![](/images/CacheMemoryUsage.png)
-
-:::warning Attention!
-In the first beta release this memory usage includes memory usage by the inner Object Cache plugin structures.
-So, it cannot be zero.
-:::
-
-* **Limit for the Object Cache database**
-
-![](/images/MaxCacheMemoryLimit.png)
-
-
-Click on the ![](/images/EditLimitPen.png) to change the limit.
-
-:::warning Attention!
-There is the value limitation for the Max Cache Memory: from 16 MB to 16 GB.
-:::
-
-![](/images/CacheMemoryLimitation.png)
-
-Use the ![](/images/PurgeAllCache.png) button to clear cache for all websites.
-
-* **Smart Advice Suggestions**
-
-
-### Manage Smart Advice
-
-The advices are in the table:
-
-![](/images/SmartAdviceTable.png)
-
-To get an updated list of advices, click the *Refresh advice* button.
-
-A **not applied advice** has the *Review* status, description of suggesting optimization and the *Turn on site optimization* button.
-
-![](/images/NotAppliedAdvice.png)
-
-An applied advice will not disappear from the AccelerateWP interface, but it will be in the *Applied* state.
-
-![](/images/AppliedAdvice.png)
-	
-
-### Object Cache Module error messages
-
-#### No compatibility message
-
-Causes of the "No compatibility" message are always [Limitations](/wpos-plugin/#object-cache-module-limitations). Each message has a small "how to", so you can try to fix them by yourself via cPanel or WordPress Admin interface.
-
-![](/images/WPNoCompatibility.png)
-
-#### Misconfiguration message
-
-The misconfiguration message can appear in the following cases:
-
-* Redis process cannot be started for some period of time. **Resolution**: [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new) for further investigation.
-* WordPress Redis Object Cache plugin is disabled via WordPress Admin Gui/Plugins. **Resolution** You can resolved it by yourself via the WordPress Admin Gui.
-* Version of PHP is incompatible or does not have all needed modules installed.
-
-![](/images/WPMisconfiguration.png)
-
-#### Post check issues
-
-If you have some Post check issue after turning On the Object Cache module, you can leave them as disabled (in that case the engine reverts all changes). Or you can ignore the issue and continue working with the enabled Object Cache module.
-
-#### General errors and warnings during activation plugin
-
-If you get something like "Unexpected WordPress error" you can do the following:
-
-![](/images/UnexpectedError.png)
-
-* As the first step, verify that [Limitations](/wpos-plugin/#object-cache-module-limitations) are not broken.
-* As the second step, [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new) for further investigation.
-
-### Object Cache module Known Issues
-
-1. If you open the WordPress admin panel and find Redis Object cache plugin, open Settings for it, you can find the following:
-
-**Port: 6379**
-
-It is incorrect (will be fixed soon), it works via the **file socket**.
-
-2. If you get the following error:
-
-![](/images/WPOSError1.png)
-
-Try again later. The cause of the problem is a DDoS protection for the WP Optimization suite which allows restart daemon only once in a minute.
+### Limitations
+There are the following requirements to activate Object Caching:
+* Website must use ea-PHP version 7.4 or 8.0.
+* WordPress version must be 3.7 and higher.
+* Other WordPress Caching plugins must not be installed.
+* [Snuffleupagus](https://snuffleupagus.readthedocs.io/) must be turned off.
+* WordPress should not run in Multisite mode.
 
 
 ## FAQ
+### What does "AccelerateWP is advice-driven" mean?
+CloudLinux automatically tracks slow requests for the websites for the appropriate period of time and sometimes creates an advice to activate the specific feature for your website. When you see the `Advice available` link in the corresponding feature cell, it means that AccelerateWP decided that this feature will significantly improve the performance of your website. Otherwise you see the `No advice` note.
+
+![](/images/FAQAdviceTable.png)
+
+Click the `Advice available` link and push `Apply advice` button to automatically enable the feature.
+
+![](/images/FAQAdviceReview.png)
+
+### What should I do if I see both the "No advice" note and the "Incompatible" link?
+Causes of the `Incompatible` note are always Limitations: [AccelerateWP](/wpos-plugin/#limitations) or [AccelerateWP Premium](/wpos-plugin/#limitations-2) related ones.
+
+Each message has a small "how to", so you can try to fix them by yourself via cPanel or WordPress Admin interface.
+
+![](/images/FAQIncompatible.png)
+
+![](/images/FAQIncMessage.png)
+
+### What should I do if I see the "Misconfiguration"?
+The misconfiguration message can appear in the cases when optimization feature was activated, but AccelerateWP detects it as not working anymore.
+
+The most frequent cases are:
+* Redis process cannot be started for some period of time.
+  * **Resolution:** [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new) for further investigation.
+* WordPress Redis Object Cache plugin is disabled via WordPress Admin Gui/Plugins.
+  * **Resolution:** You can resolve it by yourself via the WordPress Admin Gui.
+* Version of PHP was changed for website and it is no longer compatible with feature.
+  * **Resolution:** change website php version to the one which is compatible with optimization feature.
+  
+In all cases, please refer to the misconfiguration text, which has a small "how to", so you can try to fix them by yourself via cPanel or WordPress Admin interface.
+
+### Feature activation starts, but fails with "post check issue"
+Post check is a sanity check of your website to make sure that it is working properly after feature activation.
+
+AccelerateWP expects website to:
+* return http code 200 when downloading home page
+* do not write any errors in logs
+
+If you have some Post check issue after turning on the feature, you can leave them as disabled (in that case the engine reverts all changes). Or you can ignore the issue and continue working with the enabled Object Caching in order to manually check the source of the issue.
 
 ### How to measure the speed of the website?
-
-You can measure the speed of your website before turning On the Object Cache module and after.
+You can measure the speed of your website before turning On the Object Caching and after.
 
 The popular tools:
-
 * [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
 * [Pingdom Website Speed Test](https://tools.pingdom.com/)
 
 ### Where the AccelerateWP tool log files are located?
-
-Login via SSH, find in your home directory  `~/.clwpos/main.log`. Or you can open it using the control panel file manager.
+Login via SSH, find in your home directory `~/.clwpos/main.log`. Or you can open it using the control panel file manager.
 
 ### I already use the WordPress Redis object cache plugin. Will the AccelerateWP be useful for me?
-
-No, in the current version we suggest the same optimization as you already have. But we include other useful modules in the next versions, so let’s stay in touch.
+No, in the current version we suggest the same optimization as you already have. But we include other useful features in the next versions, so let’s stay in touch.
 
 ### I already use the WordPress Redis object cache PRO plugin. Will the AccelerateWP be useful for me?
+No, in the current version we suggest the same optimization as you already have. But we include other useful features in the next versions, so let’s stay in touch.
 
-No, in the current version we suggest the same optimization as you already have. But we include other useful modules in the next versions, so let’s stay in touch.
+### Why did my site's PageSpeed score decrease after enabling AccelerateWP?
+AccelerateWP & mod_pagespeed:
+1. Enabling AccelerateWP activates the force gzip cache function when the cache is archived by the plugin, and Apache simply gives it as is to the user browser. In this case, the mod_pagespeed module cannot apply its optimizations, since it does not work with archives, but only with pure HTML.
+2. AccelerateWP does not activate all possible resource optimizations by default.
 
+Because of this, the total score of the site by PageSpeed may be reduced. **To improve the PageSpeed score, it is necessary to enable additional optimizations of AccelerateWP.**
 
+AccelerateWP with maximum settings for fast sites gives a similar PageSpeed score for mobile and an improved result for desktop.
+AccelerateWP with maximum settings for sites loading longer than 1 second always gives a better score than mod_pagespeed.
