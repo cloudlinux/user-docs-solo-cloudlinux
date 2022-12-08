@@ -168,7 +168,8 @@ module.exports = {
               "/introduction/",
               "/wpos-plugin/",
               "/end-user-x-ray-plugin/",
-              "/smart-advice/"
+              "/smart-advice/",
+              "/php-selector/"
             ]
           }
         ]
