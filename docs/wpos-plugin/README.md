@@ -2,53 +2,67 @@
 
 ## Overview
 
-AccelerateWP is a complex solution to help our customers increase their WordPress site performance. With AccelerateWP you can manage optimization features, like object caching, css and js preprocessing and website preloading.
+AccelerateWP is a complex solution to help customers increase their WordPress site performance. 
+With AccelerateWP you can manage optimization features, like object caching, CSS and JavaScript 
+preprocessing and website preloading.
 
-In order to start using AccelerateWP, go to the cPanel interface and find the `AccelerateWP` application in the `Software` section.
+In order to start using AccelerateWP, go to the cPanel interface and find the `AccelerateWP` 
+application in the `Software` section.
 
-![](/images/AWPApp.png)
+![](./images/AWPApp.png)
 
 Click the application button and get into the AccelerateWP interface.
 
-![](/images/AWPUserUI.png)
+![](./images/AWPUserUI.png)
 
-Each row in the table is the WordPress website that was found on server and each column is the optimization feature.
+Each row in the table is the WordPress website that was found on server and each column is the 
+optimization feature.
 
-AccelerateWP is fully advice-driven: the feature could be enabled once the Smart Advice is issued. Smart advice may be issued during profiling a website with X-Ray. X-Ray PHP profiler detects concrete bottlenecks in website performance and thus is able to select a best suited optimization feature to increase it significantly.
+AccelerateWP is built as advice-driven plugin: the feature is suggested to be enabled once 
+the Smart Advice is issued. Smart advice may be issued during profiling a website with X-Ray. 
+X-Ray PHP profiler detects concrete bottlenecks in website performance and thus is able to select 
+a best suited optimization feature to increase it significantly.
 
-Use the `Advice available` link to check advice details and click the `Apply advice` button to activate the feature.
+Use the `Advice available` link to check advice details and click the `Apply advice` 
+button to activate the feature.
 
-![](/images/AdviceReview.png)
+![](./images/AdviceReview.png)
 
 After a couple of minutes, the feature will be activated and advice becomes `Applied`.
 Close the window and see `Active` link in the corresponding cell of the table.
 
-![](/images/AdviceApplied.png)
+![](./images/AdviceApplied.png)
 
+If you still would like to try the feature on the website where advice was not issued,
+click on the gear icon and enable the feature.
+
+![](./images/AWPEnableManually.png)
 
 ## AccelerateWP feature: WordPress optimization plugin
-AccelerateWP is a base feature that provides full page caching, GZIP compression and some other useful optimizations.
+AccelerateWP is a base feature that provides full page caching, GZIP compression and some other useful 
+optimizations.
 
-In order to start working with AccelerateWP feature, check if advice is available in the corresponding cell on the intersection of website and Accelerate WP column.
+In order to start working with AccelerateWP feature, check if advice is available in the corresponding 
+cell on the intersection of website and Accelerate WP column.
 
-![](/images/AWPUserUI.png)
+![](./images/AWPUserUI.png)
 
 And click the "Apply advice" button to activate the AccelerateWP feature.
 
-![](/images/AdviceReview.png)
+![](./images/AdviceReview.png)
 
 After a couple of minutes, the plugin will be installed.
 Login into the WordPress Admin and find the AccelerateWP in the list of active plugins.
 
-![](/images/WPPlugins.png)
+![](./images/WPPlugins.png)
 
-Page caching will be enabled by default. Click "Settings" link below the plugin name to configure additional options.
+Page caching will be enabled by default. Click the "Settings" link below the plugin name to configure additional options.
 
-![](/images/AWPPlugin.png)
+![](./images/AWPPlugin.png)
 
 
 ### Limitations
-* Website must use php version 7.0 or higher.
+* Website must use PHP version 7.0 or higher.
 * WordPress version must be 5.4 and higher.
 * Other WordPress Caching plugins must not be installed.
 * WordPress should not run in Multisite mode.
@@ -60,13 +74,14 @@ Find more additional options in WordPress admin page.
 ### Mobile caching
 Use it only if you website is adapted to use on smartphones and mobile phones.
 
-Separate cache files for mobile devices. In this case the content for mobile devices will be cached into different cache file as for desktop\tablets.
+Separate cache files for mobile devices. In this case the content for mobile devices will be cached 
+into different cache file as for desktop\tablets.
 
 This option is necessary if you have some functionality only for mobile devices, not for desktop\tablets.
 
-We prepared the diagram to help you understand if you need mobile caching.
+The following diagram helps you understand if you need mobile caching.
 
-![](/images/MobileDiag.png)
+![](./images/MobileDiag.png)
 
 :::tip Note
 If you use an additional layer of Cache (Varnish, NGINX , etc.) make sure it can distinguish between desktop and mobile visitors.
@@ -94,7 +109,7 @@ Putting CSS and JS files into their respective groups, makes requests for downlo
 
 HTTP/2 introduced multiplexing. Now, the browser can send unlimited number of requests to the server, then download all files simultaneously with only one TCP connection.
 
-Consequently, HTTP/2 takes care of multiple TCP connections and the waiting times before each download. In one sense, consolidating CSS and JS files might be unnecessary.
+Consequently, HTTP/2 takes care of multiple TCP connections and the waiting time before each download. In one sense, consolidating CSS and JS files might be unnecessary.
 
 To verify which HTTP version is used for requests on your site, you can use https://tools.keycdn.com/http2-test
 
@@ -132,7 +147,7 @@ This option will be active only if you choose Minify javascript files. It is not
 
 **Load JavaScript deferred**
 
-One major cause of slow web pages is a so-called blocking script https://www.dummies.com/web-design-development/javascript/deferred-loading-with-javascript/
+One major cause of slow web pages is a so-called blocking script: [https://www.dummies.com/web-design-development/javascript/deferred-loading-with-javascript/](https://www.dummies.com/web-design-development/javascript/deferred-loading-with-javascript/).
 
 Loading JavaScript called a blocking script blocks the webpage from loading.
 
@@ -182,7 +197,7 @@ Provides functionality to preload the HTML content of the hovered link for accel
 
 **Prefetch DNS Requests**
 
-If your website uses external resources (e.g. Google fonts, Youtube video, etc) AccelerateWP can preload these resources for accelerating loading pages. To activate preloading external URLs, provide a list of external URLs.
+If your website uses external resources (e.g. Google fonts, YouTube video, etc.), AccelerateWP can preload these resources for accelerating loading pages. To activate preloading external URLs, provide a list of external URLs.
 
 **Preload Fonts**
 
@@ -255,10 +270,6 @@ When the server uses Varnish, you need to activate the add-on for implementing c
 If your site uses the WebP plugin you can activate AccelerateWP WebP Compatibility add-on to achieve browser compatibility with your WebP images.
 
 
-### CloudFlare
-If your site is connected to the Cloudflare CDN you can activate the Cloudflare add-on to manage Cloudflare options with AccelerateWP and automatic clearing cache when AccelerateWP clears site cache. After activating the add-on, you need to click the *Modify Options* button and specify the Cloudflare API key, Account E-mail and Zone ID.
-
-
 ### CDN
 CDN stands for Content Delivery Network, the feature that simplifies and speeds up resources loading for your customers.
 
@@ -270,11 +281,11 @@ To set up a CDN in the AccelerateWP you must register CDN zone and get pull zone
 
 After setting up the Pull zone, you will receive an address, for example: domain.b-cdn.net
 
-![](/images/CDNGeneral.png)
+![](./images/CDNGeneral.png)
 
 Go to the WP Admin of your WordPress site, open the settings of the AccelerateWP (Step 1) and select the CDN section (Step 2).  Select the option: Enable Content Delivery Network (Step 3) and fill in the "CDN CNAME(s)" field with the previously received domain.b-cdn.net address (Step 4).
 
-![](/images/CDNFlow.png)
+![](./images/CDNFlow.png)
 
 Click the "Save changes" button (Step 5).
 
@@ -287,26 +298,50 @@ For backing up the settings, there is a function for exporting settings. To use 
 
 ## AccelerateWP Premium: Object caching feature
 
-**Object caching is a premium feature which is currently in beta and available only for some hosters.**
+:::tip Note
+Object caching is a premium feature which is currently in beta and available only for some hosters.
+:::
 
-Unlike full page caching, this mechanism is not saving the whole page in cache, but stores database query results in additional storage for quick access. This mechanism is really helpful in case your site needs to process multiple pages per second as requests come in and may be helpful in case when full page caching cannot be used, e.g. on personalized pages.
+Unlike full page caching, this mechanism is not saving the whole page in cache, but stores database 
+query results in additional storage for quick access. This mechanism is really helpful in case your 
+site needs to process multiple pages per second as requests come in and may be helpful in case when 
+full page caching cannot be used, e.g. on personalized pages.
 
-When we recommend to use Object caching feature:
+The Object caching feature is recommended to use in the following:
+
 * Websites used for extremely active exchange of information (forums, blogs, etc..)
 * Websites with too many requests running at the same time
 * Websites having important pages that cannot be cached entirely and exclude from the "whole page caching" due to any reason
 
-In order to start working with Object caching feature, check if advice is available in the corresponding cell on the intersection of website and AccelerateWP Premium column.
+In order to start working with Object caching feature, check if advice is available in the corresponding
+cell on the intersection of website and AccelerateWP Premium column.
 
-![](/images/AWPPremiumUI.png)
+![](./images/AWPPremiumUI.png)
 
 And click the "Apply advice" button to activate the Object caching feature.
 
-![](/images/AWPPremiumReview.png)
+![](./images/AWPPremiumReview.png)
 
-After couple of minutes, the redis instance will be configured, plugin will be installed and activated.
+If you still would like to try the feature on the website where advice was not issued,
+click on the gear icon and enable the feature.
 
-![](/images/AWPPremiumApplied.png)
+![](./images/AWPEnableManually.png)
+
+In case if you still don't have active Premium subscription, you will see the following
+window with link to the page where you can upgrade subscription.
+
+![](./images/AWPUpgradeLink.png)
+
+If you don't see any links, contact your hoster to upgrade your subscription manually.
+
+![](./images/AWPUpgradeNoLink.png)
+
+If subscription is active, you will bypass the subscription window and proceed
+directly to the plugin installation.
+
+After a couple of minutes, the redis instance will be configured, plugin will be installed and activated.
+
+![](./images/AWPPremiumApplied.png)
 
 Close the window and see "Active" link in the corresponding cell of the table.
 
@@ -323,22 +358,27 @@ There are the following requirements to activate Object Caching:
 
 ## FAQ
 ### What does "AccelerateWP is advice-driven" mean?
-CloudLinux automatically tracks slow requests for the websites for the appropriate period of time and sometimes creates an advice to activate the specific feature for your website. When you see the `Advice available` link in the corresponding feature cell, it means that AccelerateWP decided that this feature will significantly improve the performance of your website. Otherwise you see the `No advice` note.
+CloudLinux automatically tracks slow requests for the websites for the appropriate period of
+time and sometimes creates an advice to activate the specific feature for your website. 
+When you see the `Advice available` link in the corresponding feature cell, it means that 
+AccelerateWP decided that this feature will significantly improve the performance of your website. 
+Otherwise you see the `No advice` note.
 
-![](/images/FAQAdviceTable.png)
+![](./images/FAQAdviceTable.png)
 
 Click the `Advice available` link and push `Apply advice` button to automatically enable the feature.
 
-![](/images/FAQAdviceReview.png)
+![](./images/FAQAdviceReview.png)
 
 ### What should I do if I see both the "No advice" note and the "Incompatible" link?
-Causes of the `Incompatible` note are always Limitations: [AccelerateWP](/wpos-plugin/#limitations) or [AccelerateWP Premium](/wpos-plugin/#limitations-2) related ones.
+Causes of the `Incompatible` note are always Limitations: [AccelerateWP](/wpos-plugin/#limitations) or
+[AccelerateWP Premium](/wpos-plugin/#limitations-2) related ones.
 
 Each message has a small "how to", so you can try to fix them by yourself via cPanel or WordPress Admin interface.
 
-![](/images/FAQIncompatible.png)
+![](./images/FAQIncompatible.png)
 
-![](/images/FAQIncMessage.png)
+![](./images/FAQIncMessage.png)
 
 ### What should I do if I see the "Misconfiguration"?
 The misconfiguration message can appear in the cases when optimization feature was activated, but AccelerateWP detects it as not working anymore.
