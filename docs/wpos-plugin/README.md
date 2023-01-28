@@ -8,7 +8,7 @@ To start using AccelerateWP with cPanel interface, find the `AccelerateWP` appli
 
 ![](/images/AWPApp.png)
 
-If you use Plesk control panel, search for AccelerateWP in the search bar.
+If you use Plesk control panel, (1) trigger the side panel and (2) choose the AccelerateWP widget.
 
 ![](/images/AWPPlesk.png)
 
