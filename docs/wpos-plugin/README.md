@@ -43,7 +43,7 @@ AccelerateWP is a base feature that provides full page caching, GZIP compression
 optimizations.
 
 In order to start working with AccelerateWP feature, check if advice is available in the corresponding 
-cell on the intersection of website and Accelerate WP column.
+cell on the intersection of website and AccelerateWP column.
 
 ![](./images/AWPUserUI.png)
 
@@ -332,6 +332,13 @@ window with link to the page where you can upgrade subscription.
 
 ![](./images/AWPUpgradeLink.png)
 
+When upgrade link is clicked, you will see the billing interface opened in new browser window.
+Successful upgrade of your subscription will automatically close the billing window and start
+background upgrade process. Once your payment is processed, feature will be automatically installed
+on the website.
+
+![](./images/AWPUpgradeModuleWait.png)
+
 If you don't see any links, contact your hoster to upgrade your subscription manually.
 
 ![](./images/AWPUpgradeNoLink.png)
@@ -427,3 +434,13 @@ Because of this, the total score of the site by PageSpeed may be reduced. **To i
 
 AccelerateWP with maximum settings for fast sites gives a similar PageSpeed score for mobile and an improved result for desktop.
 AccelerateWP with maximum settings for sites loading longer than 1 second always gives a better score than mod_pagespeed.
+
+### My subscription was upgraded, but feature was not installed automatically
+This can be caused by several reasons. Either your website was detected to have malfunctions
+or there was an issue with environment when feature was installed (e.g. bad internet connectivity with WordPress market).
+
+First, try to enable feature manually using AccelerateWP interface. 
+Most likely you will find human-readable error message there.
+
+If the issue persists, or you cannot resolve it yourself, 
+contact your hoster and attach `~/.clwpos/main.log` for further investigation. 
