@@ -6,10 +6,16 @@ AccelerateWP is a complex solution to help customers increase their WordPress si
 With AccelerateWP you can manage optimization features, like object caching, CSS and JavaScript 
 preprocessing and website preloading.
 
+
 In order to start using AccelerateWP, go to the cPanel interface and find the `AccelerateWP` 
 application in the `Software` section.
 
+
 ![](./images/AWPApp.png)
+
+If you use Plesk control panel, (1) trigger the side panel and (2) choose the AccelerateWP widget.
+
+![](/images/AWPPlesk.png)
 
 Click the application button and get into the AccelerateWP interface.
 
@@ -381,7 +387,7 @@ Click the `Advice available` link and push `Apply advice` button to automaticall
 Causes of the `Incompatible` note are always Limitations: [AccelerateWP](/wpos-plugin/#limitations) or
 [AccelerateWP Premium](/wpos-plugin/#limitations-2) related ones.
 
-Each message has a small "how to", so you can try to fix them by yourself via cPanel or WordPress Admin interface.
+Each message has a small "how to", so you can try to fix them by yourself via control panel or WordPress Admin interface.
 
 ![](./images/FAQIncompatible.png)
 
@@ -398,7 +404,7 @@ The most frequent cases are:
 * Version of PHP was changed for website and it is no longer compatible with feature.
   * **Resolution:** change website php version to the one which is compatible with optimization feature.
   
-In all cases, please refer to the misconfiguration text, which has a small "how to", so you can try to fix them by yourself via cPanel or WordPress Admin interface.
+In all cases, please refer to the misconfiguration text, which has a small "how to", so you can try to fix them by yourself via control panel or WordPress Admin interface.
 
 ### Feature activation starts, but fails with "post check issue"
 Post check is a sanity check of your website to make sure that it is working properly after feature activation.
