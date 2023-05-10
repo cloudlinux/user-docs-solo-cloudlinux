@@ -141,6 +141,21 @@ To prevent that, use (. *).CSS wildcards to exclude all files in a specific loca
 
 3rd Party: when excluding external CSS files, use the domain or the full URL path.
 
+**Optimize CSS delivery (Critical Path CSS)**
+
+Critical Path CSS eliminates render-blocking CSS on your website and improves browser page render performance. Your website will load much faster for your visitors.
+
+:::tip Note
+This feature can only be activated in the AccelerateWP hosting panel interface or in the SmartAdvice WordPress plugin. Once activated, you will be able to manage the options in the AccelerateWP WordPress plugin.
+:::
+
+![AWPCriticalCSSEnabled](https://github.com/cloudlinux/user-docs-solo-cloudlinux/assets/71260515/66788efe-0c22-4310-a11b-572b6647f3b0)
+
+The function starts automatically after switching on. It takes some time to generate the Critical CSS. You will see a notification with the generation status. If necessary, you can add additional styles to the Critical CSS in the fallback CSS field.
+
+![AWPCriticalCSSStarted](https://github.com/cloudlinux/user-docs-solo-cloudlinux/assets/71260515/abdd950a-75ca-4bde-8eb9-faae0b5194c5)
+
+Each time you change the site's theme, the Critical CSS will be regenerated. Also, if you have made any changes to the styles of your site, you need to manually regenerate the Critical CSS by clicking on the "Regenerate critical CSS" button.
 
 ### JavaScript Files
 **Minify javascript files**
