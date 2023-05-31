@@ -363,8 +363,7 @@ When using AccelerateWP CDN, then the enabling/disabling can only be done in the
 
 Enabling AccelerateWP Content Delivery Network using Advice will automatically set up your AccelerateWP WordPress plugin.
 
-![](./images/AWPCDNEnabled.png)![AWPCDNEnabled](https://github.com/cloudlinux/user-docs-solo-cloudlinux/assets/71260515/02c9bc2d-30cc-40e0-bc0f-2558f7a61c5c)
-
+![](./images/AWPCDNEnabled.png)
 
 
 CDN stands for Content Delivery Network, the feature that simplifies and speeds up resources loading for your customers.
