@@ -356,19 +356,26 @@ If your site uses the WebP plugin you can activate AccelerateWP WebP Compatibili
 
 
 ### CDN
+
+:::tip Note
+When using AccelerateWP CDN, then the enabling/disabling can only be done in the hosting panel in the AccelerateWP interface.
+:::
+
+Enabling AccelerateWP Content Delivery Network using Advice will automatically set up your AccelerateWP WordPress plugin.
+
+![](./images/AWPCDNEnabled.png)![AWPCDNEnabled](https://github.com/cloudlinux/user-docs-solo-cloudlinux/assets/71260515/02c9bc2d-30cc-40e0-bc0f-2558f7a61c5c)
+
+
+
 CDN stands for Content Delivery Network, the feature that simplifies and speeds up resources loading for your customers.
 
-In order to start using CDN, you need:
+In order to start using 3rd party CDN, you need:
 1. Public website on the Internet with a valid domain name
-2. Pull a CDN zone, for example, https://bunny.net/
+2. PullZone of CDN
 
 To set up a CDN in the AccelerateWP you must register CDN zone and get pull zone configuration.
 
-After setting up the Pull zone, you will receive an address, for example: domain.b-cdn.net
-
-![](./images/CDNGeneral.png)
-
-Go to the WP Admin of your WordPress site, open the settings of the AccelerateWP (Step 1) and select the CDN section (Step 2).  Select the option: Enable Content Delivery Network (Step 3) and fill in the "CDN CNAME(s)" field with the previously received domain.b-cdn.net address (Step 4).
+Go to the WP Admin of your WordPress site, open the settings of the AccelerateWP (Step 1) and select the CDN section (Step 2). Select the option: Enable Content Delivery Network (Step 3) and fill in the "CDN CNAME(s)" field with CDN pull zone address (Step 4).
 
 ![](./images/CDNFlow.png)
 
